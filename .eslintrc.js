@@ -4,7 +4,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:import/errors',
     'plugin:import/typescript',
-    'plugin:prettier/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
   ],
@@ -31,7 +30,9 @@ module.exports = {
       'error',
       {
         'newlines-between': 'always',
-        pathGroups: [{ pattern: '{react,react-*}', group: 'external', position: 'before' }],
+        pathGroups: [
+          { pattern: '{react,react-*}', group: 'external', position: 'before' },
+        ],
         pathGroupsExcludedImportTypes: ['builtin'],
         alphabetize: { order: 'asc', caseInsensitive: true },
       },
