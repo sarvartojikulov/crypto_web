@@ -4,9 +4,9 @@
 
 @layer base {
   body {
-    @apply bg-base-200;
+    @apply container;
   }
   .container {
-    @apply mx-auto bg-base-200;
+    @apply mx-auto;
   }
 }
