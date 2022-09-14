@@ -15,7 +15,7 @@ const HomePage = () => {
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
       <main className="container">
-        <div className="grid grid-cols-12">
+        <div className="grid grid-cols-10 gap-x-12">
           <Button type="btn-primary" onClick={() => 'Button click'}>
             Button
           </Button>
