@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Ticker from '@streact/components-ticker';
 import { Button } from '@streact/core-button';
 import { Input } from '@streact/core-form';
 import { Layout } from '@streact/core-layout';
@@ -15,11 +16,10 @@ const HomePage = () => {
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
       <main className="container">
-        <div className="grid grid-cols-10 gap-x-12">
-          <Button type="btn-primary" onClick={() => 'Button click'}>
-            Button
-          </Button>
-          <Input color="input-primary" />
+        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-12">
+          <div className="col-span-full md:col-span-3 lg:col-span-5">
+            <Ticker />
+          </div>
         </div>
       </main>
     </>
