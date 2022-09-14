@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply container;
-  }
   .container {
     @apply mx-auto;
+  }
+  body {
+    @apply container;
   }
 }
