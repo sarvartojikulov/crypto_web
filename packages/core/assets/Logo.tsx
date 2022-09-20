@@ -5,10 +5,10 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    {...props}
     width={300}
     height={40}
     viewBox="0 -10 200 40"
+    {...props}
   >
     <path
       fillRule="evenodd"

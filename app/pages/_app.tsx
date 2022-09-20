@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Footer from '@streact/components-footer';
 import Navbar from '@streact/components-navbar';
 import { AnimatePresence } from 'framer-motion';
 import '../styles/globals.css';
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       >
         <Component {...pageProps} />
       </AnimatePresence>
+      <Footer />
     </>
   );
 }

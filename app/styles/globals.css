@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply min-h-screen;
+  }
+  #__next {
+    @apply min-h-screen flex flex-col;
+  }
   .container {
     @apply mx-auto pt-2 px-4 md:px-0;
   }
