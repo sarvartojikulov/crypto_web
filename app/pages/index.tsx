@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Accordion from '@streact/components-accordion';
 import { BoxSectionAbout } from '@streact/components-box-sections';
 import Ticker from '@streact/components-ticker';
 import Box from '@streact/core-box';
