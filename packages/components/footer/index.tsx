@@ -6,7 +6,7 @@ import { IconInstagram, IconTelegram, Logo } from '@streact/core-assets';
 
 const Footer = () => {
   return (
-    <footer className="mt-12 md:mt-auto pt-4 pb-8 grid grid-cols-4 md:grid-cols-8 lg:grid-cols-8 grid-rows-3 md:grid-rows-1 gap-x-5 gap-y-5 border-t border-gray-500">
+    <footer className="container mt-12 md:mt-auto pt-4 pb-8 grid grid-cols-4 md:grid-cols-8 lg:grid-cols-8 grid-rows-3 md:grid-rows-1 gap-x-5 gap-y-5 border-t border-gray-500">
       <div className="col-span-full row-start-3 md:row-start-1 md:col-span-3 mt-auto mx-auto md:mx-0 text-xs">
         © Krypto Swap. All rights reserved
       </div>

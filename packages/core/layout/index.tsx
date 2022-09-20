@@ -10,9 +10,9 @@ type Props = {
 };
 
 const variants = {
-  hidden: { opacity: 0, y: 5 },
+  hidden: { opacity: 0, y: 50 },
   enter: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -5 },
+  exit: { opacity: 0, y: -50 },
   anim: { y: 0, opacity: 1 },
 };
 
@@ -25,11 +25,11 @@ const Layout = ({ children, title, description }: Props): JSX.Element => (
     />
     <motion.main
       initial="hidden"
-      animate="anim"
+      animate={{ y: 0, opacity: 1 }}
       exit="exit"
       variants={variants}
-      transition={{ type: 'linear' }}
-      className="container flex flex-col"
+      transition={{ type: 'linear', delay: 10 }}
+      className="flex flex-col"
     >
       {children}
     </motion.main>

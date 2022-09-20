@@ -7,7 +7,11 @@ module.exports = {
     path.join(__dirname, './packages/**/*.{js,ts,jsx,tsx}'),
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'base-background': '#3D4451',
+      },
+    },
   },
   daisyui: {
     themes: [

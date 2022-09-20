@@ -12,9 +12,6 @@
   .container {
     @apply mx-auto pt-2 px-4 md:px-0;
   }
-  body {
-    @apply container;
-  }
   h1 {
     @apply text-4xl;
   }
