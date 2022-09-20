@@ -4,7 +4,7 @@
 
 @layer base {
   .container {
-    @apply mx-auto;
+    @apply mx-auto pt-2 px-4 md:px-0;
   }
   body {
     @apply container;

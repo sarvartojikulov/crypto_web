@@ -1,0 +1,21 @@
+{
+  "about": {
+    "title": "O nas",
+    "titleBody": "Krypto Swap to stacjonarny kantor w Polsce, w którym możesz kupić lub sprzedać kryptowalutę. Nasza oferta jest bardzo konkurencyjna cenowo i zawsze możesz sprawdzić aktualny kurs na naszej stronie internetowej. Co jeszcze wyróżnia nasze usługi? Profesjonalizm, wieloletnie doświadczenie i indywidualne podejście do każdego klienta. Możesz zawrzeć z nami umowę na dogodnych warunkach. Możemy poszczycić się gronem lojalnych klientów, którzy nam zaufali, a ich zadowolenie z naszych usług jest dla nas najlepszą reklamą.",
+    "boxes": {
+      "secure": {
+        "title": "Wymień natychmiast",
+        "body": "Natychmiastowa wymiana setek kryptowalut."
+      },
+      "fast": {
+        "title": "Szybko",
+        "body": "Możesz dosłownie wymienić kryptowalutę w kilka minut."
+      },
+      "legal": {
+        "title": "Niska prowizja",
+        "body": "Prowizja od wymiany wynosi tylko 0 - 3,5%."
+      }
+    },
+    "cta": "jeszcze"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "name": "@streact/core-icons",
+  "version": "0.1.0",
+  "main": "./index.ts"
+}
