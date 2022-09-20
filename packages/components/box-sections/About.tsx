@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 
+import { IconSecure, IconClock, IconLegal } from '@streact/core-assets';
 import Box from '@streact/core-box';
-import { IconSecure, IconClock, IconLegal } from '@streact/core-icons';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 
