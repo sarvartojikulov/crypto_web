@@ -4,6 +4,7 @@ import { IconSecure, IconClock, IconLegal } from '@streact/core-assets';
 import Box from '@streact/core-box';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
 
 //TODO: i18 and refactoring
 
@@ -48,7 +49,9 @@ const BoxAbout: React.FC<BoxAboutProps> = ({
       <h3 className="card-title mb-4">{t(title)}</h3>
       <p className="text-sm whitespace-normal mb-3">{t(body)}</p>
       <div className="card-actions justify-end mt-auto">
-        <button className="btn btn-sm btn-primary">{t('about.cta')}</button>
+        <Link href="about">
+          <button className="btn btn-sm btn-primary">{t('about.cta')}</button>
+        </Link>
       </div>
     </Box>
   );

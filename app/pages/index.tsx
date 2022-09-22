@@ -6,6 +6,7 @@ import Ticker from '@streact/components-ticker';
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
 import { GetStaticProps, NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const LandingSection: React.FC = () => {
@@ -43,14 +44,18 @@ const CalculatorSection: React.FC = () => {
 };
 
 const AboutSection: React.FC = () => {
+  const { t } = useTranslation('main');
+
   return (
     <Section className="relative mt-24 pb-24">
       <Section className="col-span-full container">
-        <h2 className="col-span-full mb-6 text-4xl">About us</h2>
-        <p className="col-span-full">Some text</p>
+        <h2 className="col-span-full mb-6 text-4xl">{t('about.title')}</h2>
+        <p className="col-span-full mb-20 md:mb-14 lg:mb-20">
+          {t('about.titleBody')}
+        </p>
         <BoxSectionAbout />
       </Section>
-      <SectionBackground className="-z-10 absolute h-[600px] md:h-80 lg:h-56 w-full bottom-40 md:top-40 lg:bottom-0" />
+      <SectionBackground className="-z-10 absolute h-[600px] md:h-80 lg:h-56 w-full bottom-40 md:bottom-52 lg:bottom-20" />
     </Section>
   );
 };
