@@ -1,3 +1,4 @@
 import BoxSectionAbout from './About';
+import BoxSectionContact from './Contact';
 
-export { BoxSectionAbout };
+export { BoxSectionAbout, BoxSectionContact };
