@@ -1,11 +1,7 @@
 import React from 'react';
 
-<<<<<<< HEAD
-import Calculator from '@streact/components-calculator';
-=======
 import { BoxSectionAbout } from '@streact/components-box-sections';
 import SectionBackground from '@streact/components-section-background';
->>>>>>> main
 import Ticker from '@streact/components-ticker';
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
@@ -67,20 +63,9 @@ const AboutSection: React.FC = () => {
 const HomePage: NextPage = () => {
   return (
     <Layout title="" description="">
-<<<<<<< HEAD
-      <Section>
-        <div className="col-span-full md:col-span-3 lg:col-span-5 h-20"></div>
-        <div className="grid grid-cols-12 gap-x-5 bg-base-300 col-span-full py-12">
-          <div className="col-span-8 col-start-3">
-            <Calculator />
-          </div>
-        </div>
-      </Section>
-=======
       <LandingSection />
       <CalculatorSection />
       <AboutSection />
->>>>>>> main
     </Layout>
   );
 };
