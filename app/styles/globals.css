@@ -10,7 +10,7 @@
     @apply min-h-screen flex flex-col;
   }
   .container {
-    @apply mx-auto pt-2 px-4 md:px-0;
+    @apply mx-auto px-4 md:px-0;
   }
   h1 {
     @apply lg:text-5xl md:text-3xl text-2xl;

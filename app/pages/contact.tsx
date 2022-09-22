@@ -10,7 +10,8 @@ const Contact: NextPage = () => {
   const { locale } = useRouter();
   return (
     <Layout title="" description="">
-      <Section className="container">
+      <Section className="container mt-20 gap-y-10">
+        <h1 className="col-span-full">Contact us</h1>
         <BoxSectionContact />
       </Section>
     </Layout>
