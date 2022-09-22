@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
+import { IconBitcoin, IconEthereum, IconTether } from '@streact/core-assets';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -8,16 +9,19 @@ type unit_type = 'usd' | 'pln';
 const COINS = [
   {
     name: 'Bitcoin',
+    icon: <IconBitcoin />,
     pln: '95249,58',
     usd: '21213,00',
   },
   {
     name: 'Ethereum',
+    icon: <IconEthereum />,
     pln: '7680,58',
     usd: '1513,00',
   },
   {
-    name: 'Solana',
+    name: 'USDT',
+    icon: <IconTether />,
     pln: '148.79',
     usd: '35.70',
   },
@@ -30,7 +34,7 @@ const Ticker = () => {
 
   //TODO: Fetch price list
   const price_list = useMemo(() => {
-    return COINS.map(({ name, pln, usd }) => ({ name, pln, usd }));
+    return COINS.map(({ name, pln, icon, usd }) => ({ name, pln, icon, usd }));
   }, []);
 
   return (
@@ -61,9 +65,14 @@ const Ticker = () => {
             exit={{ y: -5, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {price_list.map((price, i) => (
-              <li className="flex w-full justify-between py-2" key={i}>
-                <div>{price.name}</div>
+            {price_list.map((price) => (
+              <li className="flex w-full justify-between py-2" key={price.name}>
+                <div className="flex items-center space-x-2">
+                  <span className="min-w-[30px] flex justify-center">
+                    {price.icon}
+                  </span>
+                  <span>{price.name}</span>
+                </div>
                 <div>
                   {price[unit]}
                   <span className="ml-2 uppercase text-primary">{unit}</span>
