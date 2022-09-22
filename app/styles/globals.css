@@ -13,7 +13,7 @@
     @apply mx-auto px-4 md:px-0;
   }
   h1 {
-    @apply lg:text-5xl md:text-3xl text-2xl;
+    @apply lg:text-5xl text-3xl;
   }
   h2 {
     @apply text-2xl;

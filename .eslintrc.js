@@ -46,7 +46,6 @@ module.exports = {
     'react/display-name': 'off',
     'react/no-unused-prop-types': 'error',
     'react/prop-types': 'off',
-    curly: [2, 'multi-or-nest'],
   },
   settings: {
     react: {
