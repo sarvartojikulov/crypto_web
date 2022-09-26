@@ -19,6 +19,12 @@ const variants = {
 
 const Layout = ({ children, title, description }: Props): JSX.Element => (
   <>
+    <Head>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.00001, viewport-fit=cover"
+      />
+    </Head>
     <NextSeo
       title={title}
       description={description}
