@@ -31,4 +31,18 @@
   h4 {
     @apply font-semibold last:mb-0;
   }
+  /* Form */
+  input {
+    outline: none !important;
+  }
+
+  .input {
+    @apply ring-offset-2 ring-offset-base-100 focus:ring-2;
+  }
+  .input-primary {
+    @apply ring-primary focus:outline-none;
+  }
+  .input-accent {
+    @apply ring-accent;
+  }
 }

@@ -12,7 +12,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const LandingSection: React.FC = () => {
   return (
-    <Section className="container py-60 gap-y-3 md:gap-y-6">
+    <Section className="container py-20 md:py-32 lg:py-60 gap-y-3 md:gap-y-6">
       <h1 className="uppercase w-full col-span-full md:col-span-5 lg:col-span-7">
         Crypto asset exchange
       </h1>
