@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { BoxSectionAbout } from '@streact/components-box-sections';
+import Calculator from '@streact/components-calculator';
 import SectionBackground from '@streact/components-section-background';
 import Ticker from '@streact/components-ticker';
 import Layout from '@streact/core-layout';
@@ -11,7 +12,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const LandingSection: React.FC = () => {
   return (
-    <Section className="container py-28 gap-y-3 md:gap-y-6">
+    <Section className="container py-60 gap-y-3 md:gap-y-6">
       <h1 className="uppercase w-full col-span-full md:col-span-5 lg:col-span-7">
         Crypto asset exchange
       </h1>
@@ -36,8 +37,8 @@ const LandingSection: React.FC = () => {
 const CalculatorSection: React.FC = () => {
   return (
     <Section className="bg-base-300">
-      <Section className="col-span-full h-96 container">
-        <h2>Calculator</h2>
+      <Section className="col-span-full container py-12 gap-y-4 auto-rows-min">
+        <Calculator />
       </Section>
     </Section>
   );

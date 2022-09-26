@@ -14,7 +14,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="container pt-2 navbar bg-base-300 shadow-md rounded-box">
+    <div className="container mt-2 navbar bg-base-300 shadow-md rounded-box">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
