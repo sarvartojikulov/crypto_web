@@ -10,7 +10,7 @@ const tab_animation = {
   hide: {
     opacity: 0,
     transition: {
-      duration: 0.2,
+      duration: 0.7,
       ease: 'linear',
       when: 'beforeChildren',
     },
@@ -18,7 +18,7 @@ const tab_animation = {
   show: {
     opacity: 1,
     transition: {
-      duration: 0.2,
+      duration: 0.7,
       ease: 'linear',
       when: 'beforeChildren',
     },
@@ -38,7 +38,7 @@ const TabPanels = () => {
           variants={tab_animation}
           static
           className={cn(
-            'rounded-xl bg-base-100 p-3',
+            'rounded-xl bg-base-100 ',
             'ring-base-100 shadow-xl focus:outline-none focus:ring-2'
           )}
         >
@@ -53,7 +53,7 @@ const TabPanels = () => {
           variants={tab_animation}
           static
           className={cn(
-            'rounded-xl bg-base-100 p-3',
+            'rounded-xl bg-base-100 ',
             'ring-base-100 shadow-xl focus:outline-none focus:ring-2'
           )}
         >
