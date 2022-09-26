@@ -27,7 +27,7 @@ const tab_animation = {
 
 const TabPanels = () => {
   return (
-    <Tab.Panels className="mt-2">
+    <Tab.Panels className="col-span-full lg:col-start-3 lg:col-span-8">
       <AnimatePresence mode="sync">
         <Tab.Panel
           key={0}
@@ -57,7 +57,7 @@ const TabPanels = () => {
             'ring-base-100 shadow-xl focus:outline-none focus:ring-2'
           )}
         >
-          <h2>Mode sell</h2>
+          <PanelBuy />
         </Tab.Panel>
       </AnimatePresence>
     </Tab.Panels>

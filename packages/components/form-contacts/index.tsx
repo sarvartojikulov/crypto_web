@@ -43,7 +43,7 @@ const FormContacts = () => {
                 type="text"
                 name="name"
                 placeholder="Name"
-                className="input input-primary w-full"
+                className="input input-primary w-full focus:outline-none ring-primary ring-offset-2 ring-offset-base-100 focus:ring-2"
               />
             </div>
             <div className="col-span-full md:col-span-2">
