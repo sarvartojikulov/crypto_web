@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { BoxSectionAbout } from '@streact/components-box-sections';
 import Calculator from '@streact/components-calculator';
@@ -6,6 +6,7 @@ import SectionBackground from '@streact/components-section-background';
 import Ticker from '@streact/components-ticker';
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
+import { getCurrenciesData } from '@streact/services';
 import { GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -61,7 +62,9 @@ const AboutSection: React.FC = () => {
   );
 };
 
-const HomePage: NextPage = () => {
+const HomePage: NextPage = (props) => {
+  // eslint-disable-next-line no-console
+  console.log(props);
   return (
     <Layout title="" description="">
       <LandingSection />
@@ -72,10 +75,13 @@ const HomePage: NextPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const currencies = await getCurrenciesData();
+
   const locales = await serverSideTranslations(locale!, ['common', 'main']);
   return {
     props: {
       ...locales,
+      currencies,
     },
   };
 };
