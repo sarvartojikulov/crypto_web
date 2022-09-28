@@ -6,12 +6,17 @@ import SectionBackground from '@streact/components-section-background';
 import Ticker from '@streact/components-ticker';
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
+import { Currency } from '@streact/lib-binance/types';
 import { getCurrenciesData } from '@streact/services';
 import { GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-const LandingSection: React.FC = () => {
+type SectionProps = {
+  currencies: Currency[];
+};
+
+const LandingSection: React.FC<SectionProps> = ({ currencies }) => {
   return (
     <Section className="container py-20 md:py-32 lg:py-60 gap-y-3 md:gap-y-6">
       <h1 className="uppercase w-full col-span-full md:col-span-5 lg:col-span-7">
@@ -29,13 +34,13 @@ const LandingSection: React.FC = () => {
         Calculator
       </button>
       <div className="col-span-full md:row-span-3 md:col-span-3 lg:col-span-5 px-10 md:px-0 lg:px-12 mt-8 md:mt-0">
-        <Ticker />
+        <Ticker currencies={currencies} />
       </div>
     </Section>
   );
 };
 
-const CalculatorSection: React.FC = () => {
+const CalculatorSection: React.FC<SectionProps> = ({ currencies }) => {
   return (
     <Section className="bg-base-300">
       <Section className="col-span-full container py-12 gap-y-4 auto-rows-min">
@@ -62,13 +67,16 @@ const AboutSection: React.FC = () => {
   );
 };
 
-const HomePage: NextPage = (props) => {
+type HomePageProps = {
+  currencies: Currency[];
+};
+
+const HomePage: NextPage<HomePageProps> = ({ currencies }) => {
   // eslint-disable-next-line no-console
-  console.log(props);
   return (
     <Layout title="" description="">
-      <LandingSection />
-      <CalculatorSection />
+      <LandingSection currencies={currencies} />
+      <CalculatorSection currencies={currencies} />
       <AboutSection />
     </Layout>
   );

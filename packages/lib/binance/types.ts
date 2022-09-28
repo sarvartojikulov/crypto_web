@@ -15,5 +15,5 @@ export type TickerAssetsResponse = {
 
 export type Currency = {
   asset: string;
-  prices: Record<any, number>;
+  prices: Record<string, number>;
 };
