@@ -36,7 +36,8 @@ export default async function handler(
   if (req.method === 'GET') {
     const data = await readFile();
     return res.status(200).json(data);
-  } else if (req.method === 'POST') {
+  }
+  if (req.method === 'POST') {
     try {
       const validated = adminSchema.parse(req.body);
       await writeData(validated);
@@ -44,7 +45,6 @@ export default async function handler(
     } catch (error) {
       return res.status(400).json({ error: 'Invalid body' });
     }
-  } else {
-    return res.status(400).json({ error: 'Method not allowed' });
   }
+  return res.status(400).json({ error: 'Method not allowed' });
 }

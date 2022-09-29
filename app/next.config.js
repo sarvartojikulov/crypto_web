@@ -10,4 +10,5 @@ module.exports = withBundleAnalyzer({
     externalDir: true,
   },
   i18n,
+  NEXT_TELEGRAM_TOKEN: process.env.NEXT_TELEGRAM_TOKEN,
 });
