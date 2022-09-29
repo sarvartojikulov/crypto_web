@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { BoxSectionAbout } from '@streact/components-box-sections';
 import Calculator from '@streact/components-calculator';
@@ -6,17 +6,13 @@ import SectionBackground from '@streact/components-section-background';
 import Ticker from '@streact/components-ticker';
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
-import { Currency } from '@streact/lib-binance/types';
-import { getCurrenciesData } from '@streact/services';
+import { AppData, getAppData } from '@streact/services-app-data';
+import { AppDataProvider } from '@streact/services-context';
 import { GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-type SectionProps = {
-  currencies: Currency[];
-};
-
-const LandingSection: React.FC<SectionProps> = ({ currencies }) => {
+const LandingSection: React.FC = () => {
   return (
     <Section className="container py-20 md:py-32 lg:py-60 gap-y-3 md:gap-y-6">
       <h1 className="uppercase w-full col-span-full md:col-span-5 lg:col-span-7">
@@ -34,13 +30,13 @@ const LandingSection: React.FC<SectionProps> = ({ currencies }) => {
         Calculator
       </button>
       <div className="col-span-full md:row-span-3 md:col-span-3 lg:col-span-5 px-10 md:px-0 lg:px-12 mt-8 md:mt-0">
-        <Ticker currencies={currencies} />
+        <Ticker />
       </div>
     </Section>
   );
 };
 
-const CalculatorSection: React.FC<SectionProps> = ({ currencies }) => {
+const CalculatorSection: React.FC = () => {
   return (
     <Section className="bg-base-300">
       <Section className="col-span-full container py-12 gap-y-4 auto-rows-min">
@@ -68,28 +64,31 @@ const AboutSection: React.FC = () => {
 };
 
 type HomePageProps = {
-  currencies: Currency[];
+  appData: AppData;
 };
 
-const HomePage: NextPage<HomePageProps> = ({ currencies }) => {
+const HomePage: NextPage<HomePageProps> = ({ appData }) => {
   // eslint-disable-next-line no-console
+  console.log(appData);
   return (
     <Layout title="" description="">
-      <LandingSection currencies={currencies} />
-      <CalculatorSection currencies={currencies} />
+      <AppDataProvider value={appData}>
+        <LandingSection />
+        <CalculatorSection />
+      </AppDataProvider>
       <AboutSection />
     </Layout>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const currencies = await getCurrenciesData();
+  const appData = await getAppData();
 
   const locales = await serverSideTranslations(locale!, ['common', 'main']);
   return {
     props: {
       ...locales,
-      currencies,
+      appData,
     },
   };
 };

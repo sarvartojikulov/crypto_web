@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';

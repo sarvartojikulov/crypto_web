@@ -2,25 +2,13 @@ import React, { Fragment, useState } from 'react';
 
 import { Listbox, Transition } from '@headlessui/react';
 import { IconDropdown } from '@streact/core-assets';
+import { Currency } from '@streact/lib-binance/types';
 import cn from 'classnames';
 
-const people = [
-  { name: 'Wade Cooper' },
-  { name: 'Arlene Mccoy' },
-  { name: 'Devon Webb' },
-  { name: 'Tom Cook' },
-  { name: 'Tanya Fox' },
-  { name: 'Hellen Schmidt' },
-];
-
-type Currency = {
-  name: string;
-  course: number;
-};
 type SelectProps = {
-  onChange: (currency: Currency) => void;
-  value: Currency;
-  currencies: Currency[];
+  onChange: (currency: string) => void;
+  value: string;
+  currencies: string[];
   style: 'primary' | 'accent';
 };
 
@@ -42,7 +30,7 @@ const Select: React.FC<SelectProps> = ({
               { 'border-accent': style === 'accent' }
             )}
           >
-            <span className="block truncate">{value.name}</span>
+            <span className="block truncate">{value}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <IconDropdown
                 className={cn('h-5 w-5 transition-all', {
@@ -78,7 +66,7 @@ const Select: React.FC<SelectProps> = ({
                           selected ? 'font-medium' : 'font-normal'
                         }`}
                       >
-                        {currency.name}
+                        {currency}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">

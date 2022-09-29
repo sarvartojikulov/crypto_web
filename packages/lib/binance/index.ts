@@ -30,13 +30,13 @@ const api = axios.create({
 });
 
 export async function getFiatAssets(): Promise<FiatAssetResponse> {
-  const courses = await api.get(FIAT_ASSETS_URL); // api.get('http://localhost:3001/fiat'); // fetch(FIAT_ASSETS_URL);
-  return courses.data;
+  const { data } = await api.get(FIAT_ASSETS_URL); // api.get('http://localhost:3001/fiat'); // fetch(FIAT_ASSETS_URL);
+  return data;
 }
 
 export async function getCryptoAssets(): Promise<TickerAssetsResponse> {
-  const tickerAssets = await api.get(CRYPTO_ASSETS_URL); // api.get('http://localhost:3001/crypto');
-  return tickerAssets.data;
+  const { data } = await api.get(CRYPTO_ASSETS_URL); // api.get('http://localhost:3001/crypto');
+  return data;
 }
 
 export async function getBinanceData(): Promise<Currency[]> {

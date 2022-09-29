@@ -4,12 +4,12 @@ import { Select } from '@streact/core-form';
 import { Currency } from '@streact/lib-binance/types';
 import { useAppData } from '@streact/services-context';
 
-const PanelBuy = () => {
+const PanelSell = () => {
   const { currencies, admin } = useAppData();
   const { available, courses } = currencies;
 
-  const [buyWith, setBuyWith] = useState<string>(available.fiat[0]);
-  const [getIn, setGetIn] = useState<string>(available.crypto[0]);
+  const [sellWith, setSellWith] = useState<string>(available.crypto[0]);
+  const [getIn, setGetIn] = useState<string>(available.fiat[0]);
 
   const [input, setInput] = useState<number>(0);
   const [totals, setTotals] = useState<Record<string, number>>({
@@ -19,12 +19,12 @@ const PanelBuy = () => {
   });
 
   useEffect(() => {
-    const coin = courses.find((item) => item.asset === getIn);
-    const converted = input / Number(coin?.prices[buyWith]);
+    const coin = courses.find((item) => item.asset === sellWith);
+    const converted = input * Number(coin?.prices[getIn]);
     const fees = input * admin.calculator.percent;
     const total = input + fees;
     setTotals({ converted, fees, total });
-  }, [input, buyWith, getIn]);
+  }, [input, sellWith, getIn]);
 
   return (
     <div className="grid grid-cols-8 auto-rows-min gap-y-6 py-8 md:py-4">
@@ -35,9 +35,9 @@ const PanelBuy = () => {
           </p>
           <Select
             style="accent"
-            value={buyWith}
-            currencies={currencies.available.fiat}
-            onChange={setBuyWith}
+            value={sellWith}
+            currencies={currencies.available.crypto}
+            onChange={setSellWith}
           />
           <input
             type="tel"
@@ -54,13 +54,13 @@ const PanelBuy = () => {
           <Select
             style="primary"
             value={getIn}
-            currencies={available.crypto}
+            currencies={available.fiat}
             onChange={setGetIn}
           />
           <input
             type="text"
             onChange={() => ({})}
-            value={totals.converted.toFixed(6)}
+            value={totals.converted.toFixed(2)}
             defaultValue={0}
             className="input input-primary h-[42px] mt-1 w-full md:max-w-[200px] col-span-3"
           />
@@ -73,14 +73,14 @@ const PanelBuy = () => {
         <div className="flex justify-between">
           <span>{admin.calculator.percent * 100}% fee</span>
           <span>
-            {totals.fees.toFixed(2)} {buyWith}
+            {totals.fees.toFixed(6)} {sellWith}
           </span>
         </div>
         <div className="divider divider-vertical my-0"></div>
         <div className="flex justify-between">
           <span className="font-bold">Total</span>
           <span className="text-accent font-bold">
-            {totals.total.toFixed(2)} {buyWith}
+            {totals.total.toFixed(6)} {sellWith}
           </span>
         </div>
       </div>
@@ -91,4 +91,4 @@ const PanelBuy = () => {
   );
 };
 
-export default PanelBuy;
+export default PanelSell;

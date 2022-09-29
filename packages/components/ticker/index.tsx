@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 
 import { IconBitcoin, IconEthereum, IconTether } from '@streact/core-assets';
-import { Currency } from '@streact/lib-binance/types';
+import { useAppData } from '@streact/services-context';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -20,17 +20,14 @@ const COINS = [
   },
 ];
 
-type TickerProps = {
-  currencies: Currency[];
-};
-
-const Ticker: React.FC<TickerProps> = ({ currencies }) => {
-  const units = Object.keys(currencies[0].prices);
+const Ticker: React.FC = () => {
+  const { currencies } = useAppData();
+  const units = currencies.available.fiat;
   const [activeUnit, setActiveUnit] = useState<number>(0);
 
   const price_list = useMemo(() => {
     const activeCurrency = units[activeUnit];
-    return currencies.map((item) => {
+    return currencies.courses.map((item) => {
       const price = item.prices[activeCurrency];
       const coinData = COINS.find(({ name }) => name == item.asset);
       return { ...coinData, price };

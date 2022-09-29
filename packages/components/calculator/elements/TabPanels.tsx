@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { motion as m, AnimatePresence } from 'framer-motion';
 
 import PanelBuy from './PanelBuy';
+import PanelSell from './PanelSell';
 
 const tab_animation = {
   hide: {
@@ -57,7 +58,7 @@ const TabPanels = () => {
             'ring-base-100 shadow-xl focus:outline-none focus:ring-2'
           )}
         >
-          <PanelBuy />
+          <PanelSell />
         </Tab.Panel>
       </AnimatePresence>
     </Tab.Panels>
