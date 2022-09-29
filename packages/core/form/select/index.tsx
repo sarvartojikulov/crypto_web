@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 
 import { Listbox, Transition } from '@headlessui/react';
 import { IconDropdown } from '@streact/core-assets';
-import { Currency } from '@streact/lib-binance/types';
 import cn from 'classnames';
 
 type SelectProps = {

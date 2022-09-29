@@ -56,6 +56,7 @@ const Ticker: React.FC = () => {
       <div className="card-body pt-2 pb-4 px-7">
         <AnimatePresence mode="wait">
           <motion.div
+            key={units[activeUnit]}
             initial={{ y: 5, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -5, opacity: 0 }}

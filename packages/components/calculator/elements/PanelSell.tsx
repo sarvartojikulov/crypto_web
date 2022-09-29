@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Select } from '@streact/core-form';
-import { Currency } from '@streact/lib-binance/types';
 import { useAppData } from '@streact/services-context';
 
 const PanelSell = () => {
@@ -61,7 +60,6 @@ const PanelSell = () => {
             type="text"
             onChange={() => ({})}
             value={totals.converted.toFixed(2)}
-            defaultValue={0}
             className="input input-primary h-[42px] mt-1 w-full md:max-w-[200px] col-span-3"
           />
         </div>
