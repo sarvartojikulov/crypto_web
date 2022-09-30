@@ -11,7 +11,7 @@ import { NextPage } from 'next/types';
 const Contact: NextPage = () => {
   const { locale } = useRouter();
   return (
-    <Layout title="" description="">
+    <Layout title="Contact | Crypto Asset Exchanger" description="Contact us">
       <Section className="container mt-20 gap-y-10">
         <h1 className="col-span-full">Contact us</h1>
         <BoxSectionContact />

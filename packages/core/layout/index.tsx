@@ -9,12 +9,10 @@ type Props = {
   title: string;
   description: string;
 };
-
 const variants = {
-  hidden: { opacity: 0, y: 50 },
-  enter: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -50 },
-  anim: { y: 0, opacity: 1 },
+  initial: { opacity: 0 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  exit: { opacity: 0 },
 };
 
 const Layout = ({ children, title, description }: Props): JSX.Element => (
@@ -31,11 +29,11 @@ const Layout = ({ children, title, description }: Props): JSX.Element => (
       openGraph={{ title, description }}
     />
     <motion.main
-      initial="hidden"
-      animate={{ y: 0, opacity: 1 }}
-      exit="exit"
+      key={title + description}
       variants={variants}
-      transition={{ type: 'linear', delay: 10 }}
+      initial="initial"
+      animate="animate"
+      exit="exit"
       className="flex flex-col"
     >
       {children}

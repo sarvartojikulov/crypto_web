@@ -8,7 +8,7 @@ import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
 import { AppData, getAppData } from '@streact/services-app-data';
 import { AppDataProvider } from '@streact/services-context';
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -71,7 +71,7 @@ const HomePage: NextPage<HomePageProps> = ({ appData }) => {
   // eslint-disable-next-line no-console
   console.log(appData);
   return (
-    <Layout title="" description="">
+    <Layout title="Crypto Asset Exchanger" description="Some description">
       <AppDataProvider value={appData}>
         <LandingSection />
         <CalculatorSection />
@@ -81,13 +81,11 @@ const HomePage: NextPage<HomePageProps> = ({ appData }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   const appData = await getAppData();
-
-  const locales = await serverSideTranslations(locale!, ['common', 'main']);
   return {
     props: {
-      ...locales,
+      ...(await serverSideTranslations(locale as string, ['common', 'main'])),
       appData,
     },
   };

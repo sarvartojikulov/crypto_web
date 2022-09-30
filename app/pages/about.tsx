@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 const About: NextPage = () => {
   const { locale } = useRouter();
   return (
-    <Layout title="" description="">
+    <Layout title="About | Crypto Asset Exchanger" description="About us">
       <Section>
         <div className="col-span-full justify-self-center text-xl">
           <h1>About {locale}</h1>
