@@ -8,7 +8,7 @@ import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
 import { AppData, getAppData } from '@streact/services-app-data';
 import { AppDataProvider } from '@streact/services-context';
-import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 

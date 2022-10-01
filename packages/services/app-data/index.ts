@@ -1,7 +1,6 @@
-import { AdminData, getAdminData } from '@streact/lib-admin';
+import { AdminData, getAdminDataForApp } from '@streact/lib-admin';
 import { getBinanceData } from '@streact/lib-binance';
 import { Currency } from '@streact/lib-binance/types';
-import { FileWatcherEventKind } from 'typescript';
 
 type Currencies = {
   available: {
@@ -19,7 +18,7 @@ export type AppData = {
 export async function getAppData(): Promise<AppData> {
   const [currencies, { admin }] = await Promise.all([
     getBinanceData(),
-    getAdminData(),
+    getAdminDataForApp(),
   ]);
   const availableFiat = Object.keys(currencies[0].prices);
   const availableCrypto = currencies.map(({ asset }) => asset);

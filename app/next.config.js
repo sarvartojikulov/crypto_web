@@ -10,5 +10,9 @@ module.exports = withBundleAnalyzer({
     externalDir: true,
   },
   i18n,
-  NEXT_TELEGRAM_TOKEN: process.env.NEXT_TELEGRAM_TOKEN,
+  webpack5: true,
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+    return config;
+  },
 });

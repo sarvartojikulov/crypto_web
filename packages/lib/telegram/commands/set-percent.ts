@@ -1,43 +1,32 @@
 /* eslint-disable no-console */
-import { writeAdminData } from '@streact/lib-admin';
+import { getChatId, updatePercent } from '@streact/lib-admin';
 
 import { Message } from '../types';
 import sendMessageToUser from '../utils/sendMessage';
-
-const SARVAR = 448599910;
 
 const messages = {
   notAdmin: 'You are not admin!',
   bad_request: 'Wrong use of command. Please type /help for help.',
   failed: 'Process failed. please contact developer',
-  success: 'New Calculator percent was updated successfully',
+  success: 'New Calculator percent was updated successfully!',
 };
 
 export default async function runSetPercentCommand({ chat, text }: Message) {
-  if (chat.id !== SARVAR) {
+  const adminChatId = await getChatId();
+  if (chat.id !== adminChatId) {
     return sendMessageToUser(chat.id, messages['notAdmin']);
   }
-  const input = text.split(' ')[1];
-  if (input.length === 0 || typeof input === undefined) {
+  const [_, percent] = text.split(' ');
+
+  if (typeof percent === 'undefined' || percent.length === 0) {
     return sendMessageToUser(chat.id, messages['bad_request']);
   }
-  console.log('>> ', Number(input));
-  const body = {
-    admin: {
-      calculator: {
-        percent: Number(input),
-      },
-    },
-  };
-  const res = await writeAdminData(body);
+  const res = await updatePercent({
+    percent: Number(percent) / 100,
+  });
   if (res === undefined) {
     return sendMessageToUser(chat.id, messages['failed']);
   }
 
-  const send = await sendMessageToUser(chat.id, messages['success']);
-  if (send) {
-    console.log('[INFO]: MESSAGE SENDED');
-  } else {
-    console.log('[ERROR]: MESSAGE SENDED');
-  }
+  return sendMessageToUser(chat.id, messages['success']);
 }

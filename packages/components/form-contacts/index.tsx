@@ -3,6 +3,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import * as z from 'zod';
 
 const contactSchema = z.object({
@@ -15,7 +16,9 @@ const contactSchema = z.object({
   message: z.string().min(1, { message: 'Please enter your message' }),
 });
 
-const FormContacts = () => {
+type ContactMessage = z.infer<typeof contactSchema>;
+
+const FormContacts: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -23,12 +26,28 @@ const FormContacts = () => {
   } = useForm({
     resolver: zodResolver(contactSchema),
   });
+  //TODO: refactor, create api endpoint and send message on server side,
+  // because we cannot get bot-token from env file by client.
+  // YOU ARE STUPID SARVAR
+  function onSubmit() {
+    return handleSubmit(async (data) => {
+      if (!data) {
+        console.log('FAILED');
+      }
+      const isSended = await axios.post('/api/telegram/contact', {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        message: data.message,
+      });
+    });
+  }
 
   return (
     <div className="col-span-full lg:col-span-7 flex items-center justify-center bg-base-300 rounded-lg shadow-lg py-6 px-6">
       <form
         className="w-full grid grid-cols-4 gap-x-4 gap-y-3"
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={onSubmit}
       >
         <div className="flex flex-col col-span-full md:col-span-2">
           <label className="label pt-0">
@@ -105,7 +124,7 @@ const FormContacts = () => {
         <button
           className="btn btn-primary col-span-2 col-start-2 md:col-start-3"
           type="submit"
-          onClick={handleSubmit((d) => console.log(d))}
+          onClick={onSubmit()}
         >
           Submit
         </button>
@@ -114,4 +133,5 @@ const FormContacts = () => {
   );
 };
 
-export default FormContacts;
+export { FormContacts, contactSchema };
+export type { ContactMessage };

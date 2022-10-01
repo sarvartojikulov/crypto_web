@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BoxSectionContact } from '@streact/components-box-sections';
-import FormContacts from '@streact/components-form-contacts';
+import { FormContacts } from '@streact/components-form-contacts';
 import Map from '@streact/components-map';
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
