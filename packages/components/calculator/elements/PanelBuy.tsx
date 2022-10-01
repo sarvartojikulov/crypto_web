@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import { Select } from '@streact/core-form';
 import { useAppData } from '@streact/services-context';
+import { useTranslation } from 'next-i18next';
 
 const PanelBuy = () => {
+  const { t } = useTranslation(['main', 'common']);
   const { currencies, admin } = useAppData();
   const { available, courses } = currencies;
 
@@ -30,7 +32,7 @@ const PanelBuy = () => {
       <div className="col-span-full flex flex-col md:flex-row justify-center">
         <div className="w-full md:w-1/2 grid grid-cols-5 gap-x-5 md:flex md:flex-col items-start md:items-center px-6">
           <p className="uppercase text-accent mb-3 md:mb-5 text-sm md:text-base col-span-full">
-            You pay
+            {t('main:calculator.panels.youPay')}
           </p>
           <Select
             style="accent"
@@ -48,7 +50,7 @@ const PanelBuy = () => {
         <div className="h-0.5 w-2/3 mx-auto my-8 md:my-0 md:h-full md:w-0.5 bg-gray-500 rounded-md"></div>
         <div className="w-full md:w-1/2 grid grid-cols-5 gap-x-5 md:flex md:flex-col items-start md:items-center px-6">
           <p className="uppercase text-primary mb-3 md:mb-5 text-sm md:text-base col-span-full">
-            You get
+            {t('main:calculator.panels.youGet')}
           </p>
           <Select
             style="primary"
@@ -66,24 +68,29 @@ const PanelBuy = () => {
       </div>
 
       <div className="col-span-full mx-5 md:mx-0 md:col-span-4 md:col-start-3 bg-base-200 text-sm shadow-lg rounded-xl py-2 px-4 flex flex-col">
-        <span>Fees:</span>
+        <span className="capitalize">{t('main:calculator.fees.fees')}</span>
         <div className="divider divider-vertical my-0"></div>
         <div className="flex justify-between">
-          <span>{admin.calculator.percent * 100}% fee</span>
+          <span>
+            {t('main:calculator.fees.serviceFees')} -{' '}
+            {admin.calculator.percent * 100}%
+          </span>
           <span>
             {totals.fees.toFixed(2)} {buyWith}
           </span>
         </div>
         <div className="divider divider-vertical my-0"></div>
         <div className="flex justify-between">
-          <span className="font-bold">Total</span>
+          <span className="font-bold capitalize">
+            {t('main:calculator.fees.total')}
+          </span>
           <span className="text-accent font-bold">
             {totals.total.toFixed(2)} {buyWith}
           </span>
         </div>
       </div>
       <button className="btn btn-primary col-span-full mx-5 md:mx-0 md:col-span-4 md:col-start-3">
-        confirm
+        {t('common:button.confirm')}
       </button>
     </div>
   );

@@ -11,23 +11,25 @@ import { AppDataProvider } from '@streact/services-context';
 import { GetServerSideProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Link from 'next/link';
 
 const LandingSection: React.FC = () => {
+  const { t } = useTranslation('main');
   return (
     <Section className="container py-20 md:py-32 lg:py-60 gap-y-3 md:gap-y-6">
       <h1 className="uppercase w-full col-span-full md:col-span-5 lg:col-span-7">
-        Crypto asset exchange
+        {t('landing.title')}
       </h1>
       <p className="row-start-2 col-span-full md:col-span-4 lg:col-span-5 text-sm md:text-md lg:text-lg mb-8 md:mb-0">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-        excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-        id nisi.
+        {t('landing.description')}
       </p>
-      <button className="col-span-2 row-start-3 btn btn-active btn-primary h-14">
-        Contact
-      </button>
+      <Link href="/about">
+        <button className="col-span-2 row-start-3 btn btn-active btn-primary h-14">
+          {t('landing.links.howItWorks')}
+        </button>
+      </Link>
       <button className="col-span-2 row-start-3 btn btn-outline btn-primary h-14">
-        Calculator
+        {t('landing.links.contact')}
       </button>
       <div className="col-span-full md:row-span-3 md:col-span-3 lg:col-span-5 px-10 md:px-0 lg:px-12 mt-8 md:mt-0">
         <Ticker />

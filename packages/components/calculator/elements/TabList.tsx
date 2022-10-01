@@ -2,11 +2,13 @@ import React from 'react';
 
 import { Tab } from '@headlessui/react';
 import cn from 'classnames';
+import { useTranslation } from 'next-i18next';
 
 const TabList = () => {
+  const { t } = useTranslation('main');
   return (
     <Tab.List className="flex space-x-1 rounded-xl bg-base-100 p-1 col-span-full lg:col-start-3 lg:col-span-8 h-12">
-      {['buy', 'sell'].map((category) => (
+      {['calculator.tabs.buy', 'calculator.tabs.sell'].map((category) => (
         <Tab
           key={category}
           className={({ selected }) =>
@@ -19,7 +21,7 @@ const TabList = () => {
             )
           }
         >
-          {category}
+          {t(category)}
         </Tab>
       ))}
     </Tab.List>

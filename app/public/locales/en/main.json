@@ -1,4 +1,27 @@
 {
+  "landing": {
+    "title": "Crypto Asset Exchange",
+    "description": "Exchange any crypto currency immediately, in a few minutes, stationary.",
+    "links": {
+      "howItWorks": "How it works?",
+      "contact": "Контакт"
+    }
+  },
+  "calculator": {
+    "tabs": {
+      "buy": "buy",
+      "sell": "sell"
+    },
+    "panels": {
+      "youPay": "you pay",
+      "youGet": "you get"
+    },
+    "fees": {
+      "fees": "Fees",
+      "serviceFees": "Service fees",
+      "total": "total"
+    }
+  },
   "about": {
     "title": "About us",
     "titleBody": "Krypto Swap is a stationary exchange office in Poland where you can buy or sell cryptocurrency. Our offer is very competitively priced and you can always check the current exchange rate on our website. What else distinguishes our services? Professionalism, many years of experience and individual approach to each client. You can make a deal with us on comfortable terms. We can be proud of a group of loyal customers who trust us, and their satisfaction with our services is the best advertisement for us.",

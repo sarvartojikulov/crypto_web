@@ -1,3 +1,5 @@
 {
-  "test": "Test ru"
+  "button": {
+    "confirm": "подтвердить"
+  }
 }
