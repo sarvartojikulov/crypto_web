@@ -26,25 +26,17 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-300 rounded-box w-52"
           >
             <li>
-              <Link href="/">
-                <a>{t('navbar.links.home')}</a>
-              </Link>
+              <Link href="/">{t('navbar.links.home')}</Link>
             </li>
             <li>
-              <Link href="/about">
-                <a>{t('navbar.links.about')}</a>
-              </Link>
+              <Link href="/about">{t('navbar.links.about')}</Link>
             </li>
 
             <li>
-              <Link href="/about">
-                <a>{t('navbar.links.howItWorks')}</a>
-              </Link>
+              <Link href="/how-it-works">{t('navbar.links.howItWorks')}</Link>
             </li>
             <li>
-              <Link href="/contact">
-                <a>{t('navbar.links.contact')}</a>
-              </Link>
+              <Link href="/contact">{t('navbar.links.contact')}</Link>
             </li>
           </ul>
         </div>

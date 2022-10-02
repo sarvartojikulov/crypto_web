@@ -1,0 +1,60 @@
+{
+  "faq": [
+    {
+      "header": "Prowizje i opłaty",
+      "body": "Bitcoin Między 1000 PLN a 10000 PLN 3,5% względem ceny giełdowej\nBitcoin Powyżej 10000 PLN 3,5% względem ceny giełdowej.\nBitcoin AML od 70 000 do 500 000 PLN 3% względem ceny giełdowej.\nBitcoin AML powyżej 500 000 PLN Do negocjacji.\nInne Kryptowaluty Między 1000 PLN a 10000 PLN 3,5% względem ceny giełdowej\nInne Kryptowaluty Powyżej 10000 PLN 3,5% względem ceny giełdowej.\nInne Kryptowaluty AML od 70 000 do 500 000 PLN 3% względem ceny giełdowej.\nInne Kryptowaluty AML powyżej 500 000 PLN Do negocjacji"
+    },
+    {
+      "header": "Procedura zakupu",
+      "body": "Przychodzi Pan/Pani do wybranego biura z gotówką.\nPodaje Pan/Pani portfel do wpłaty Bitcoin lub innej kryptowaluty\nPo zaakceptowaniu kursu i ustaleniu ilości kupowanych BTC lub innej kryptowaluty przelewamy środki na wskazany portfel."
+    },
+    {
+      "header": "Procedura sprzedaży",
+      "body": "Przychodzi Pan/Pani do wybranego biura z BTC lub inną kryptowalutą.\nPo zaakceptowaniu kursu i ilości sprzedawanej kryptowaluty, wysyła Pan/Pani Bitcoin lub inną kryptowalutę na wskazany przez pracownika adres.\nW przypadku BTC czekamy na 1 potwierdzenie w sieci Blockchain, w przypadku innej kryptowaluty czekamy do momentu zaksięgowania transakcji na naszym portfelu i wtedy wydajemy gotówkę\nW przypadku sprzedaży kryptowaluty u przedstawiciela, musi być ona zawsze wysłana wcześniej. W przypadku zakupu kryptowaluty wysyłamy na wskazany portfel w momencie, gdy przedstawiciel potwierdzi transakcję."
+    },
+    {
+      "header": "Ile maksymalnie mogę wymienić u was Bitcoinów lub innej kryptowaluty?",
+      "body": "Nie ma limitu dziennego przy wymianie kryptowalut. Zawsze jednak warto nas uprzedzić o wymianie większej ilości, abyśmy mogli się do takiej wymiany przygotować."
+    },
+    {
+      "header": "Czy muszę się zapowiedzieć?",
+      "body": "Zawsze mile widziany jest telefoniczny kontakt przed wizytą. Będziemy mogli sprecyzować warunki wymiany oraz zapewnić komfortowe warunki klientowi."
+    },
+    {
+      "header": "Co to jest AML?",
+      "body": "AML to skrót od frazy Anti-Money Laundering, która dotyczy wszystkich działań podejmowanych przez organizacje świadczące usługi finansowe (głównie przez banki), mających na celu wyeliminowanie zjawiska prania brudnych pieniędzy."
+    },
+    {
+      "header": "Czy można wymienić kryptowaluty anonimowo?",
+      "body": "\nWeryfikację z dokumentem tożsamości przeprowadzamy w przypadku, gdy kwotaprzekracza kwotę 1000 euro. W przypadku wymiany kwoty do 1000 euro dowód tożsamości nie jest konieczny."
+    },
+    {
+      "header": "Czy skupujecie/sprzedajecie inne kryptowaluty np. ETH czy BTC?",
+      "body": "Na chwilę obecną handlujemy Bitcoinem (BTC), Ethereum (ETH), USDT. Zachęcamy do obserwowania naszego profilu na Facebook’u."
+    },
+    {
+      "header": "Czy dojeżdżacie do klientów?",
+      "body": "Tak, jednakże każdy dojazd do klienta ustalany jest oddzielnie. Do każdego wypadku podchodzimy indywidualnie."
+    },
+    {
+      "header": "Czy kilka osób może wysłać BTC / ETH /USDT  z jednego portfela lub czy mogę sam wysłać z kilku portfeli?",
+      "body": "Tak, nie ma dla nas znaczenia z ilu portfeli wysyłane są środki."
+    },
+    {
+      "header": "Kiedy otrzymam gotówkę?",
+      "body": "Gotówkę wypłacamy od ręki, po otrzymaniu 1 potwierdzenia na blockchain w przypadku BTC, w przypadku innych kryptowalut czekamy na zaksięgowanie na naszym porfelu."
+    },
+    {
+      "header": "Kiedy mogę wam wysłać BTC / ETH / USDT?",
+      "body": "Kryptowaluty możesz wysłać zarówno przed przyjściem do biura, jak i będąc w biurze. Preferujemy jednak kontakt mailowy (wysyłkę adresu i ustalenie kursu), co znacznie przyśpiesza wymianę BTC lub innej kryptowaluty na fiat."
+    },
+    {
+      "header": "Jak uzyskać adres do wpłaty BTC / ETH /USDT?",
+      "body": "Adres można uzyskać poprzez wysłanie do nas wiadomości e-mail na adres biuro.kryptoswap@gmail.com lub bezpośrednio w jednym z biur. Podajemy go zarówno jako ciąg znaków, jak i kod QR."
+    },
+    {
+      "header": "Czy wymiana BTC lub innej kryptowaluty w kantorze jest legalna?",
+      "body": "Oczywiście, że jest legalna. Jesteśmy zarejestrowaną firmą w Polsce, która do każdej transakcji wystawia dokumenty. Ponadto zgodnie ze stanowiskiem KNF w polskim systemie prawa nie funkcjonują przepisy zakazujące prowadzenia działalności w charakterze kantorów kryptowalut."
+    }
+  ]
+}

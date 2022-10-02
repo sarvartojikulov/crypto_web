@@ -24,7 +24,7 @@ const Select: React.FC<SelectProps> = ({
           <Listbox.Button
             className={cn(
               'relative w-full cursor-default rounded-lg',
-              'py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm border',
+              'py-2 pl-4 pr-10 text-left focus:outline-none sm:text-sm border',
               { 'border-primary': style === 'primary' },
               { 'border-accent': style === 'accent' }
             )}
@@ -67,11 +67,6 @@ const Select: React.FC<SelectProps> = ({
                       >
                         {currency}
                       </span>
-                      {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                          c
-                        </span>
-                      ) : null}
                     </>
                   )}
                 </Listbox.Option>

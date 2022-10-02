@@ -23,14 +23,16 @@ const LandingSection: React.FC = () => {
       <p className="row-start-2 col-span-full md:col-span-4 lg:col-span-5 text-sm md:text-md lg:text-lg mb-8 md:mb-0">
         {t('landing.description')}
       </p>
-      <Link href="/about">
+      <Link href="/how-it-works">
         <button className="col-span-2 row-start-3 btn btn-active btn-primary h-14">
           {t('landing.links.howItWorks')}
         </button>
       </Link>
-      <button className="col-span-2 row-start-3 btn btn-outline btn-primary h-14">
-        {t('landing.links.contact')}
-      </button>
+      <Link href="/contact">
+        <button className="col-span-2 row-start-3 btn btn-outline btn-primary h-14">
+          {t('landing.links.contact')}
+        </button>
+      </Link>
       <div className="col-span-full md:row-span-3 md:col-span-3 lg:col-span-5 px-10 md:px-0 lg:px-12 mt-8 md:mt-0">
         <Ticker />
       </div>
@@ -70,8 +72,6 @@ type HomePageProps = {
 };
 
 const HomePage: NextPage<HomePageProps> = ({ appData }) => {
-  // eslint-disable-next-line no-console
-  console.log(appData);
   return (
     <Layout title="Crypto Asset Exchanger" description="Some description">
       <AppDataProvider value={appData}>

@@ -5,8 +5,9 @@ import { FormContacts } from '@streact/components-form-contacts';
 import Map from '@streact/components-map';
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
+import { GetServerSideProps, NextPage } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { NextPage } from 'next/types';
 
 const Contact: NextPage = () => {
   const { locale } = useRouter();
@@ -22,6 +23,14 @@ const Contact: NextPage = () => {
       </Section>
     </Layout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common'])),
+    },
+  };
 };
 
 export default Contact;

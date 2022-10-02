@@ -5,7 +5,7 @@ import { IconDropdown } from '@streact/core-assets';
 import cn from 'classnames';
 
 type AccordionProps = {
-  content?: { header: string; body: string }[];
+  content: { header: string; body: string }[];
 };
 
 const TEST_DATA: AccordionProps = {
@@ -27,10 +27,10 @@ const TEST_DATA: AccordionProps = {
 
 // TODO: props with data + i18n
 
-const Accordion: React.FC<AccordionProps> = () => {
+const Accordion: React.FC<AccordionProps> = ({ content }) => {
   return (
     <div className="mx-auto w-full rounded-2xl bg-base-300 px-4 py-5 space-y-2">
-      {TEST_DATA.content?.map(({ header, body }) => {
+      {content.map(({ header, body }) => {
         return (
           <Disclosure key={header}>
             {({ open }) => (
