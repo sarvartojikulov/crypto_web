@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 const Navbar = () => {
   const router = useRouter();
   const { t } = useTranslation('common');
+
   function changeLocale(locale: string) {
     router.push(router.route, router.asPath, {
       locale: locale,
@@ -43,7 +44,9 @@ const Navbar = () => {
       </div>
       <div className="navbar-center w-44 cursor-pointer">
         <Link href="/">
-          <Logo />
+          <React.Fragment>
+            <Logo />
+          </React.Fragment>
         </Link>
       </div>
       <div className="navbar-end">

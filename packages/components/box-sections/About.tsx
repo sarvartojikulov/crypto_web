@@ -49,7 +49,7 @@ const BoxSectionAbout: React.FC = () => {
             <h3 className="card-title mb-4">{t(title)}</h3>
             <p className="text-sm whitespace-normal mb-3">{t(body)}</p>
             <div className="card-actions justify-end mt-auto">
-              <Link href="about">
+              <Link href="/about">
                 <button className="btn btn-sm btn-primary">
                   {t('about.cta')}
                 </button>
