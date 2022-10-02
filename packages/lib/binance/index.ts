@@ -30,12 +30,12 @@ const api = axios.create({
 });
 
 export async function getFiatAssets(): Promise<FiatAssetResponse> {
-  const { data } = await api.get(FIAT_ASSETS_URL); // api.get('http://localhost:3001/fiat'); // fetch(FIAT_ASSETS_URL);
+  const { data } = await api.get(FIAT_ASSETS_URL);
   return data;
 }
 
 export async function getCryptoAssets(): Promise<TickerAssetsResponse> {
-  const { data } = await api.get(CRYPTO_ASSETS_URL); // api.get('http://localhost:3001/crypto');
+  const { data } = await api.get(CRYPTO_ASSETS_URL);
   return data;
 }
 
