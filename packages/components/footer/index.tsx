@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { IconInstagram, IconTelegram, Logo } from '@streact/core-assets';
+import Link from 'next/link';
 
 // TODO: add links
 
@@ -11,15 +12,31 @@ const Footer = () => {
         © Krypto Swap. All rights reserved
       </div>
       <div className="col-span-full row-start-1 md:row-start-1 md:col-span-2 md:col-start-4 mx-auto">
-        <Logo width={200} />
+        <Link href="/" className="cursor-pointer">
+          <Logo width={200} />
+        </Link>
       </div>
       <div className="col-span-full md:col-span-2 md:col-start-7 mt-auto mx-auto md:mx-0">
         <ul className="flex space-x-6 justify-end h-full">
           <li>
-            <IconTelegram />
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.instagram.com/krypto.swap/"
+              className="cursor-pointer"
+            >
+              <IconTelegram />
+            </a>
           </li>
           <li>
-            <IconInstagram />
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.instagram.com/krypto.swap/"
+              className="cursor-pointer"
+            >
+              <IconInstagram />
+            </a>
           </li>
         </ul>
       </div>

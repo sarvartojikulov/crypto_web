@@ -1,4 +1,12 @@
 {
+  "navbar": {
+    "links": {
+      "home": "Главная",
+      "about": "О нас",
+      "howItWorks": "Как это работает?",
+      "contact": "Контакт"
+    }
+  },
   "button": {
     "confirm": "подтвердить"
   }

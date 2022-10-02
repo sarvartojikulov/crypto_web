@@ -1,4 +1,12 @@
 {
+  "navbar": {
+    "links": {
+      "home": "Home",
+      "about": "About us",
+      "howItWorks": "How it works",
+      "contact": "Contact"
+    }
+  },
   "button": {
     "confirm": "confirm"
   }

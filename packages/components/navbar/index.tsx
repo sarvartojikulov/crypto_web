@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { IconHamburger, Logo } from '@streact/core-assets';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const Navbar = () => {
   const router = useRouter();
-
+  const { t } = useTranslation('common');
   function changeLocale(locale: string) {
     router.push(router.route, router.asPath, {
       locale: locale,
@@ -26,30 +27,32 @@ const Navbar = () => {
           >
             <li>
               <Link href="/">
-                <a>Homepage</a>
+                <a>{t('navbar.links.home')}</a>
               </Link>
             </li>
             <li>
               <Link href="/about">
-                <a>About</a>
+                <a>{t('navbar.links.about')}</a>
               </Link>
             </li>
 
             <li>
               <Link href="/about">
-                <a>How it works?</a>
+                <a>{t('navbar.links.howItWorks')}</a>
               </Link>
             </li>
             <li>
               <Link href="/contact">
-                <a>Contact</a>
+                <a>{t('navbar.links.contact')}</a>
               </Link>
             </li>
           </ul>
         </div>
       </div>
-      <div className="navbar-center w-44">
-        <Logo />
+      <div className="navbar-center w-44 cursor-pointer">
+        <Link href="/">
+          <Logo />
+        </Link>
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
