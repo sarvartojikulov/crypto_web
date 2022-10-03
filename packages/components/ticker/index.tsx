@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
-import { IconBitcoin, IconEthereum, IconTether } from '@streact/core-assets';
+import { IconBitcoin, IconEthereum, IconSolana } from '@streact/core-assets';
 import { useAppData } from '@streact/services-context';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -16,7 +16,7 @@ const COINS = [
   },
   {
     name: 'Solana',
-    icon: <IconTether />,
+    icon: <IconSolana className="w-6" />,
   },
 ];
 

@@ -10,6 +10,7 @@ import IconLocation from './IconLocation';
 import IconMail from './IconMail';
 import IconPhone from './IconPhone';
 import IconSecure from './IconSecure';
+import IconSolana from './IconSolana';
 import IconTelegram from './IconTelegram';
 import IconTether from './IconTether';
 import Logo from './Logo';
@@ -25,6 +26,7 @@ export {
   IconBitcoin,
   IconEthereum,
   IconTether,
+  IconSolana,
   IconPhone,
   IconBuilding,
   IconLocation,
