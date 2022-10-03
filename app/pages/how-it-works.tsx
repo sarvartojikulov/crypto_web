@@ -25,7 +25,7 @@ const HowItWorks: NextPage = () => {
       title="How It Works? | Crypto Asset Exchanger"
       description="How It Works? "
     >
-      <Section className="container pt-10 md:pt-20">
+      <Section className="container pt-10 pb-10 md:pt-20">
         <article className="col-span-full lg:col-span-10 lg:col-start-2 prose max-w-full prose-h1:mb-6 md:prose-h1:mb-8 prose-h2:mb-6 md:prose-h2:mb-8 prose-h2:text-xl md:prose-h2:text-3xl">
           <h1 className="">How It Works?</h1>
           <p className="">
