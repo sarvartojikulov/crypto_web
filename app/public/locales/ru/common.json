@@ -8,6 +8,8 @@
     }
   },
   "button": {
-    "confirm": "подтвердить"
+    "confirm": "confirm",
+    "more": "подробнее",
+    "contact": "контакт"
   }
 }
