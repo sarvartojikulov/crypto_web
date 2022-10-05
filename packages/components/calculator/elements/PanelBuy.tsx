@@ -28,20 +28,14 @@ const PanelBuy: React.FC = () => {
     currencies: { available, courses },
     admin,
   } = useAppData();
-
   const [buyWith, setBuyWith] = useState<string>(available.fiat[0]);
   const [getIn, setGetIn] = useState<string>(available.crypto[0]);
-
   const [totals, setTotals] = useState<Record<string, number>>({
     fees: 0,
     sum: 0,
   });
   const activeInput = useRef('');
-
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const setActiveInput = (input: 'pay' | 'get' | '') => {
-    activeInput.current = input;
-  };
 
   const {
     register,
@@ -55,7 +49,17 @@ const PanelBuy: React.FC = () => {
     resolver: zodResolver(panelSchema),
   });
 
-  const price = useMemo(() => {
+  const generateTotals = (num: number) => {
+    const fees = num * admin.calculator.percent;
+    const sum = num + fees;
+    return { fees, sum };
+  };
+
+  const setActiveInput = (input: 'pay' | 'get' | '') => {
+    activeInput.current = input;
+  };
+
+  const price = useCallback(() => {
     const coin = courses.find((item) => item.asset === getIn);
     const price = Number(coin?.prices[buyWith]);
     return price;
@@ -63,31 +67,23 @@ const PanelBuy: React.FC = () => {
 
   const calculateInputGet = useCallback(() => {
     const { inputPay } = getValues();
-    const input = inputPay;
-    const totals = { fees: 0, sum: 0 };
-    const converted = input / price;
+    const converted = inputPay / price();
     setValue('inputGet', converted ? converted.toFixed(6) : 0);
-    totals.fees = input * admin.calculator.percent;
-    totals.sum = input + totals.fees;
+    const totals = generateTotals(inputPay);
     setTotals(totals);
   }, [price, getValues, setValue, admin.calculator.percent]);
 
   const calculateInputPay = useCallback(() => {
     const { inputGet } = getValues();
-    const input = inputGet;
-    const totals = { fees: 0, sum: 0 };
-    const converted = input * price;
+    const converted = inputGet * price();
     setValue('inputPay', converted ? converted.toFixed(2) : 0);
-    totals.fees = converted * admin.calculator.percent;
-    totals.sum = converted + totals.fees;
+    const totals = generateTotals(converted);
     setTotals(totals);
   }, [price, getValues, setValue, admin.calculator.percent]);
 
   useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === 'inputPay' && activeInput.current === 'pay') {
-        console.log('here');
-
         calculateInputGet();
       }
       if (name === 'inputGet' && activeInput.current === 'get') {
@@ -96,6 +92,14 @@ const PanelBuy: React.FC = () => {
     });
     return () => subscription.unsubscribe();
   }, [watch, calculateInputGet, calculateInputPay, price]);
+
+  useEffect(() => {
+    calculateInputGet();
+  }, [getIn, calculateInputGet]);
+
+  useEffect(() => {
+    calculateInputPay();
+  }, [buyWith, calculateInputPay]);
 
   return (
     <>
