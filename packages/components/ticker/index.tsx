@@ -70,9 +70,9 @@ const Ticker: React.FC = () => {
                   </span>
                   <span>{name}</span>
                 </div>
-                <div>
-                  {price.toFixed(2)}
-                  <span className="ml-2 uppercase text-primary">
+                <div className="flex items-center space-x-2">
+                  <span>{price.toFixed(2)}</span>
+                  <span className="uppercase text-primary">
                     {units[activeUnit]}
                   </span>
                 </div>

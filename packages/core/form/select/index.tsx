@@ -19,7 +19,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   return (
     <div className="mb-4 h-10 w-full max-w-[200px] col-span-2">
-      <Listbox value={value} onChange={onChange}>
+      <Listbox value={value} onChange={(value) => onChange(value)}>
         <div className="relative mt-1 max-w-sm">
           <Listbox.Button
             className={cn(

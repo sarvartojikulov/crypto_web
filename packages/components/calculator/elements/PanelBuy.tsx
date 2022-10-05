@@ -1,5 +1,11 @@
 /* eslint-disable no-console */
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,22 +24,30 @@ const panelSchema = z.object({
 
 const PanelBuy: React.FC = () => {
   const { t } = useTranslation(['main', 'common']);
-  const { currencies, admin } = useAppData();
-  const { available, courses } = currencies;
+  const {
+    currencies: { available, courses },
+    admin,
+  } = useAppData();
 
   const [buyWith, setBuyWith] = useState<string>(available.fiat[0]);
   const [getIn, setGetIn] = useState<string>(available.crypto[0]);
+
   const [totals, setTotals] = useState<Record<string, number>>({
     fees: 0,
     sum: 0,
   });
+  const activeInput = useRef('');
 
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const setActiveInput = (input: 'pay' | 'get' | '') => {
+    activeInput.current = input;
+  };
 
   const {
     register,
     watch,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm({
     mode: 'onSubmit',
@@ -41,30 +55,47 @@ const PanelBuy: React.FC = () => {
     resolver: zodResolver(panelSchema),
   });
 
-  const activeInput = useRef('');
+  const price = useMemo(() => {
+    const coin = courses.find((item) => item.asset === getIn);
+    const price = Number(coin?.prices[buyWith]);
+    return price;
+  }, [getIn, buyWith, courses]);
+
+  const calculateInputGet = useCallback(() => {
+    const { inputPay } = getValues();
+    const input = inputPay;
+    const totals = { fees: 0, sum: 0 };
+    const converted = input / price;
+    setValue('inputGet', converted ? converted.toFixed(6) : 0);
+    totals.fees = input * admin.calculator.percent;
+    totals.sum = input + totals.fees;
+    setTotals(totals);
+  }, [price, getValues, setValue, admin.calculator.percent]);
+
+  const calculateInputPay = useCallback(() => {
+    const { inputGet } = getValues();
+    const input = inputGet;
+    const totals = { fees: 0, sum: 0 };
+    const converted = input * price;
+    setValue('inputPay', converted ? converted.toFixed(2) : 0);
+    totals.fees = converted * admin.calculator.percent;
+    totals.sum = converted + totals.fees;
+    setTotals(totals);
+  }, [price, getValues, setValue, admin.calculator.percent]);
 
   useEffect(() => {
     const subscription = watch((value, { name }) => {
-      const coin = courses.find((item) => item.asset === getIn);
-      const price = Number(coin?.prices[buyWith]);
-      const totals = { fees: 0, sum: 0 };
       if (name === 'inputPay' && activeInput.current === 'pay') {
-        const input = value['inputPay'];
-        const converted = input / price;
-        setValue('inputGet', converted ? converted.toFixed(6) : 0);
-        totals.fees = input * admin.calculator.percent;
-        totals.sum = input + totals.fees;
+        console.log('here');
+
+        calculateInputGet();
       }
       if (name === 'inputGet' && activeInput.current === 'get') {
-        const converted = value['inputGet'] * price;
-        setValue('inputPay', converted ? converted.toFixed(2) : 0);
-        totals.fees = converted * admin.calculator.percent;
-        totals.sum = converted + totals.fees;
+        calculateInputPay();
       }
-      setTotals(totals);
     });
     return () => subscription.unsubscribe();
-  }, [watch]);
+  }, [watch, calculateInputGet, calculateInputPay, price]);
 
   return (
     <>
@@ -78,7 +109,7 @@ const PanelBuy: React.FC = () => {
             <Select
               style="accent"
               value={buyWith}
-              currencies={currencies.available.fiat}
+              currencies={available.fiat}
               onChange={setBuyWith}
             />
             <input
@@ -86,7 +117,7 @@ const PanelBuy: React.FC = () => {
               placeholder="0.000"
               {...register('inputPay', {
                 valueAsNumber: true,
-                onChange: () => (activeInput.current = 'pay'),
+                onChange: () => setActiveInput('pay'),
               })}
               className={classNames(
                 'input input-accent h-[42px] mt-1 w-full md:max-w-[200px] col-span-3'
@@ -117,7 +148,7 @@ const PanelBuy: React.FC = () => {
               placeholder="0.000"
               {...register('inputGet', {
                 valueAsNumber: true,
-                onChange: () => (activeInput.current = 'get'),
+                onChange: () => setActiveInput('get'),
               })}
             />
             {errors.inputGet?.message && (
@@ -135,7 +166,7 @@ const PanelBuy: React.FC = () => {
           <div className="divider divider-vertical my-0"></div>
           <div className="flex justify-between">
             <span>
-              {t('main:calculator.fees.serviceFees')} -{' '}
+              {t('main:calculator.fees.serviceFees')} -
               {admin.calculator.percent * 100}%
             </span>
             <span>
