@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { setupCache } from 'axios-cache-adapter';
 
-import { Currency, FiatAssetResponse, TickerAssetsResponse } from './types';
+import {
+  BinanceData,
+  Currency,
+  FiatAssetResponse,
+  TickerAssetsResponse,
+} from './types';
 
 const FIAT_ASSETS_URL =
   'https://www.binance.com/bapi/asset/v1/public/asset-service/product/currency';
@@ -39,7 +44,7 @@ export async function getCryptoAssets(): Promise<TickerAssetsResponse> {
   return data;
 }
 
-export async function getBinanceData(): Promise<Currency[]> {
+export async function getBinanceData(): Promise<BinanceData> {
   const [fiatAssets, cryptoAssets] = await Promise.all([
     getFiatAssets(),
     getCryptoAssets(),
@@ -48,9 +53,10 @@ export async function getBinanceData(): Promise<Currency[]> {
     ({ symbol }) => SUPPORTED_CRYPTO_ASSETS[symbol]
   );
 
-  const filteredFiatAssets = fiatAssets.data.filter(
-    ({ pair }) => SUPPORTED_FIAT_ASSETS[pair]
-  );
+  const filteredFiatAssets = fiatAssets.data
+    .filter(({ pair }) => SUPPORTED_FIAT_ASSETS[pair])
+    .map(({ pair, rate }) => ({ pair, rate }));
+
   const result = filteredCryptoAssets.map(({ symbol, price }) => {
     const usdPrice = Number(price);
     const values: Record<string, number> = filteredFiatAssets.reduce(
@@ -70,5 +76,5 @@ export async function getBinanceData(): Promise<Currency[]> {
       },
     };
   });
-  return result;
+  return { currencies: result, fiatRates: filteredFiatAssets };
 }

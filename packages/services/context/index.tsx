@@ -9,6 +9,7 @@ export const AppDataContext = React.createContext<AppData>({
       crypto: [],
     },
     courses: [],
+    fiatRates: [],
   },
   admin: {
     calculator: {

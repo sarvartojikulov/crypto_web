@@ -1,6 +1,6 @@
 import { AdminData, getAdminDataForApp } from '@streact/lib-admin';
 import { getBinanceData } from '@streact/lib-binance';
-import { Currency } from '@streact/lib-binance/types';
+import { Currency, FiatRate } from '@streact/lib-binance/types';
 
 type Currencies = {
   available: {
@@ -8,6 +8,7 @@ type Currencies = {
     crypto: string[];
   };
   courses: Currency[];
+  fiatRates: FiatRate[];
 };
 
 export type AppData = {
@@ -16,7 +17,7 @@ export type AppData = {
 };
 
 export async function getAppData(): Promise<AppData> {
-  const [currencies, { admin }] = await Promise.all([
+  const [{ currencies, fiatRates }, { admin }] = await Promise.all([
     getBinanceData(),
     getAdminDataForApp(),
   ]);
@@ -27,6 +28,7 @@ export async function getAppData(): Promise<AppData> {
     currencies: {
       available: { fiat: availableFiat, crypto: availableCrypto },
       courses: currencies,
+      fiatRates,
     },
     admin,
   };

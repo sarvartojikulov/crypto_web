@@ -25,7 +25,7 @@ const panelSchema = z.object({
 const PanelBuy: React.FC = () => {
   const { t } = useTranslation(['main', 'common']);
   const {
-    currencies: { available, courses },
+    currencies: { available, courses, fiatRates },
     admin,
   } = useAppData();
   const [buyWith, setBuyWith] = useState<string>(available.fiat[0]);
@@ -50,7 +50,17 @@ const PanelBuy: React.FC = () => {
   });
 
   const generateTotals = (num: number) => {
-    const fees = num * admin.calculator.percent;
+    let fees: number;
+    if (buyWith.toLowerCase() === 'usd') {
+      fees = num > 1000 ? num * admin.calculator.percent : 30;
+    } else {
+      const { rate } = fiatRates.find(({ pair }) =>
+        pair.toLowerCase().includes(buyWith.toLowerCase())
+      )!;
+
+      const inputInUsd = num / rate;
+      fees = inputInUsd > 1000 ? num * admin.calculator.percent : 30 * rate;
+    }
     const sum = num + fees;
     return { fees, sum };
   };
@@ -169,10 +179,7 @@ const PanelBuy: React.FC = () => {
           <span className="capitalize">{t('main:calculator.fees.fees')}</span>
           <div className="divider divider-vertical my-0"></div>
           <div className="flex justify-between">
-            <span>
-              {t('main:calculator.fees.serviceFees')} -
-              {admin.calculator.percent * 100}%
-            </span>
+            <span>{t('main:calculator.fees.serviceFees')}</span>
             <span>
               {totals.fees ? totals.fees.toFixed(2) : 0} {buyWith}
             </span>
