@@ -1,0 +1,21 @@
+{
+  "boxes": {
+    "phone": {
+      "title": "Phone"
+    },
+    "workTime": {
+      "title": "Work Time",
+      "body": [
+        "Mon-Fri 11:00-19:00",
+        "Saturday 12:00-18:00",
+        "Sunday 12:00-15:00"
+      ]
+    },
+    "address": {
+      "title": "Address"
+    },
+    "email": {
+      "title": "Email"
+    }
+  }
+}

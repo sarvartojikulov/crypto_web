@@ -28,7 +28,10 @@ const Contact: NextPage = () => {
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['common'])),
+      ...(await serverSideTranslations(locale as string, [
+        'common',
+        'contact',
+      ])),
     },
   };
 };
