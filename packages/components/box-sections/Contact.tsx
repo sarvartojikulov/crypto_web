@@ -20,7 +20,7 @@ const BoxSectionContact = () => {
           </div>
           <h2 className="card-title mx-auto">Phone</h2>
           <p className="mx-auto underline">
-            <a href="tel:123-456-7890">123-456-7890</a>
+            <a href="tel:+48 574 483 909">+48 574 483 909</a>
           </p>
         </div>
       </Box>
@@ -30,7 +30,11 @@ const BoxSectionContact = () => {
             <IconBuilding className="w-14 h-14 lg:w-18 lg:h-18" />
           </div>
           <h2 className="card-title mx-auto">Work time</h2>
-          <p className="mx-auto">Mon-Fri 10am-05pm</p>
+          <div className="mx-auto text-center">
+            <p>Пн-Пт 11:00-19:00</p>
+            <p>Суббота 12:00-18:00</p>
+            <p>Воскресенье 12:00-15:00</p>
+          </div>
         </div>
       </Box>
       <Box className="col-span-full sm:col-span-2 md:col-span-4 lg:col-span-3 py-10">
@@ -40,7 +44,7 @@ const BoxSectionContact = () => {
           </div>
           <h2 className="card-title mx-auto">Address</h2>
           <p className="mx-auto text-center">
-            Hoheluftchaussee 69, 04734 Waldheim
+            Aleja Solidarności 117 lokal 316 Warsaw, Poland
           </p>
         </div>
       </Box>
@@ -51,7 +55,9 @@ const BoxSectionContact = () => {
           </div>
           <h2 className="card-title mx-auto">Email</h2>
           <p className="mx-auto underline">
-            <a href="mailto:solomon@warsawa.net">solomon@warsawa.net</a>
+            <a href="mailto:biuro.kryptoswap@gmail.com">
+              biuro.kryptoswap@gmail.com
+            </a>
           </p>
         </div>
       </Box>
