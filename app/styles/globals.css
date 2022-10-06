@@ -45,4 +45,18 @@
   .input-accent {
     @apply ring-accent;
   }
+
+  textarea {
+    outline: none !important;
+  }
+
+  .textarea {
+    @apply ring-offset-2 ring-offset-base-100 focus:ring-2;
+  }
+  .textarea-primary {
+    @apply ring-primary focus:outline-none;
+  }
+  .textarea-accent {
+    @apply ring-accent;
+  }
 }
