@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
+import { useTranslation } from 'next-i18next';
 import * as z from 'zod';
 
 const contactSchema = z.object({
@@ -19,6 +20,7 @@ const contactSchema = z.object({
 type ContactMessage = z.infer<typeof contactSchema>;
 
 const FormContacts: React.FC = () => {
+  const { t } = useTranslation('common');
   const {
     register,
     handleSubmit,
@@ -34,7 +36,7 @@ const FormContacts: React.FC = () => {
       if (!data) {
         console.log('FAILED');
       }
-      const isSended = await axios.post('/api/telegram/contact', {
+      await axios.post('/api/telegram/contact', {
         name: data.name,
         phone: data.phone,
         email: data.email,
@@ -51,7 +53,7 @@ const FormContacts: React.FC = () => {
       >
         <div className="flex flex-col col-span-full md:col-span-2">
           <label className="label pt-0">
-            <span className="label-text">Name</span>
+            <span className="label-text">{t('labels.name')}</span>
           </label>
           <input
             type="text"
@@ -69,7 +71,7 @@ const FormContacts: React.FC = () => {
         </div>
         <div className="col-span-full md:col-span-2">
           <label className="label pt-0">
-            <span className="label-text">Phone</span>
+            <span className="label-text">{t('labels.phone')}</span>
           </label>
           <input
             type="tel"
@@ -87,7 +89,7 @@ const FormContacts: React.FC = () => {
         </div>
         <div className="col-span-full">
           <label className="label pt-0">
-            <span className="label-text">Email</span>
+            <span className="label-text">{t('labels.email')}</span>
           </label>
           <input
             type="text"
@@ -105,7 +107,7 @@ const FormContacts: React.FC = () => {
         </div>
         <div className="col-span-full">
           <label className="label pt-0">
-            <span className="label-text">Message</span>
+            <span className="label-text">{t('labels.message')}</span>
           </label>
           <textarea
             placeholder="Message"
@@ -126,7 +128,7 @@ const FormContacts: React.FC = () => {
           type="submit"
           onClick={onSubmit()}
         >
-          Submit
+          {t('button.send')}
         </button>
       </form>
     </div>

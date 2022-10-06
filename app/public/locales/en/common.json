@@ -10,6 +10,24 @@
   "button": {
     "confirm": "confirm",
     "more": "more",
-    "contact": "contact"
+    "contact": "contact",
+    "send": "send",
+    "cancel": "cancel"
+  },
+  "labels": {
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "message": "Message"
+  },
+  "modal": {
+    "calculator": {
+      "title": "Thank you!",
+      "body": "Please fill your contact information, we will contact you as soon as possible!"
+    },
+    "confirm": {
+      "title": "Message has been sent!",
+      "body": "We will contact you as soon as possible!"
+    }
   }
 }

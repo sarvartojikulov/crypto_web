@@ -8,8 +8,26 @@
     }
   },
   "button": {
-    "confirm": "confirm",
+    "confirm": "potwierdzić",
     "more": "jeszcze",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "send": "wysłać",
+    "cancel": "anulować"
+  },
+  "labels": {
+    "name": "Imię",
+    "phone": "Telefon",
+    "email": "Email",
+    "message": "Posłanie"
+  },
+  "modal": {
+    "calculator": {
+      "title": "Dziękuję Ci!",
+      "body": "Podaj swoje dane kontaktowe, skontaktujemy się z Tobą tak szybko, jak to możliwe!"
+    },
+    "confirm": {
+      "title": "Wiadomość została wysłana!",
+      "body": "Skontaktujemy się jak najszybciej!"
+    }
   }
 }
