@@ -34,7 +34,9 @@ const BoxSectionContact = () => {
           </div>
           <h2 className="card-title mx-auto">{t('boxes.workTime.title')}</h2>
           <div className="mx-auto text-center">
-            {t('boxes.workTime.body', { returnObjects: true }).map((item) => (
+            {(
+              t('boxes.workTime.body', { returnObjects: true }) as Array<string>
+            ).map((item) => (
               <p key={item}>{item}</p>
             ))}
           </div>
