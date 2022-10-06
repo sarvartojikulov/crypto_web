@@ -45,6 +45,9 @@ const PanelSell: React.FC = () => {
 
   const generateTotals = () => {
     const { inputGet } = getValues();
+    if (!inputGet) {
+      return { fees: 0, sum: 0 };
+    }
     let fees: number;
     if (getIn.toLowerCase() === 'usd') {
       fees = inputGet > 1000 ? inputGet * admin.calculator.percent : 30;

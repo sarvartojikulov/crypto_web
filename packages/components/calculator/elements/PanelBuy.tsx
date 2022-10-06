@@ -45,6 +45,9 @@ const PanelBuy: React.FC = () => {
 
   const generateTotals = (num: number) => {
     let fees: number;
+    if (!num) {
+      return { fees: 0, sum: 0 };
+    }
     if (buyWith.toLowerCase() === 'usd') {
       fees = num > 1000 ? num * admin.calculator.percent : 30;
     } else {
