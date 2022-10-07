@@ -36,7 +36,7 @@ const FormContacts: React.FC = () => {
       if (!data) {
         console.log('FAILED');
       }
-      await axios.post('/api/telegram/contact', {
+      await axios.post('/api/telegram/contact-message', {
         name: data.name,
         phone: data.phone,
         email: data.email,

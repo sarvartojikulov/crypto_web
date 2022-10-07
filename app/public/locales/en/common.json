@@ -12,7 +12,8 @@
     "more": "more",
     "contact": "contact",
     "send": "send",
-    "cancel": "cancel"
+    "cancel": "cancel",
+    "close": "close"
   },
   "labels": {
     "name": "Name",
@@ -28,6 +29,17 @@
     "confirm": {
       "title": "Message has been sent!",
       "body": "We will contact you as soon as possible!"
+    },
+    "error": {
+      "title": "Przepraszamy, nie mogliśmy przetworzyć Twojej prośby!",
+      "body": "Please contact us by phone, click on the button below and you will get our contact credentials"
     }
+  },
+  "errors": {
+    "required": "Required",
+    "invalid": "Invalid",
+    "number": "Should be a number",
+    "email": "Invalid Email, example : name@mail.com",
+    "onlyPositive": "Should be positive"
   }
 }

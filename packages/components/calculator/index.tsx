@@ -6,7 +6,7 @@ import TabList from './elements/TabList';
 import TabPanels from './elements/TabPanels';
 
 const Calculator: React.FC = () => {
-  const [tabIndex, setTabIndex] = React.useState(1);
+  const [tabIndex, setTabIndex] = React.useState(0);
   return (
     <Tab.Group
       selectedIndex={tabIndex}

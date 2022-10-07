@@ -12,7 +12,8 @@
     "more": "jeszcze",
     "contact": "Kontakt",
     "send": "wysłać",
-    "cancel": "anulować"
+    "cancel": "anulować",
+    "close": "Zamknij"
   },
   "labels": {
     "name": "Imię",
@@ -28,6 +29,17 @@
     "confirm": {
       "title": "Wiadomość została wysłana!",
       "body": "Skontaktujemy się jak najszybciej!"
+    },
+    "error": {
+      "title": "",
+      "body": "Skontaktuj się z nami telefonicznie, kliknij przycisk poniżej, a otrzymasz nasze dane kontaktowe"
     }
+  },
+  "errors": {
+    "required": "Wymagany",
+    "invalid": "Nieważny",
+    "number": "Powinien być liczbą",
+    "email": "Wymagany Email, example : name@mail.com",
+    "onlyPositive": "Powinno być pozytywne"
   }
 }

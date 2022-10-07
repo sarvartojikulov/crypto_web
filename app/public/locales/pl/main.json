@@ -20,6 +20,9 @@
       "fees": "opłaty",
       "serviceFees": "Opłaty za usługi",
       "total": "całkowity"
+    },
+    "errors": {
+      "input": "Podaj prawidłową kwotę zamówienia."
     }
   },
   "about": {

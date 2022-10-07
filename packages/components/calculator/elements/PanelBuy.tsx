@@ -9,11 +9,13 @@ import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 
+import { Totals, DataToSend } from '../types';
+
 import CalculatorModal from './CalculatorModal';
 
 const panelSchema = z.object({
-  inputPay: z.number(),
-  inputGet: z.number(),
+  inputPay: z.number().positive().min(1),
+  inputGet: z.number().positive().min(0),
 });
 
 const PanelBuy: React.FC = () => {
@@ -24,11 +26,9 @@ const PanelBuy: React.FC = () => {
   } = useAppData();
   const [buyWith, setBuyWith] = useState<string>(available.fiat[0]);
   const [getIn, setGetIn] = useState<string>(available.crypto[0]);
-  const [totals, setTotals] = useState<Record<string, number>>({
-    fees: 0,
-    sum: 0,
-  });
+  const [totals, setTotals] = useState<Totals>();
   const activeInput = useRef('');
+  const [data, setData] = useState<DataToSend>();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const {
@@ -37,6 +37,7 @@ const PanelBuy: React.FC = () => {
     setValue,
     getValues,
     formState: { errors },
+    handleSubmit,
   } = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -74,6 +75,7 @@ const PanelBuy: React.FC = () => {
 
   const calculateInputGet = useCallback(() => {
     const { inputPay } = getValues();
+    if (inputPay < 0) return;
     const converted = inputPay / price();
     setValue('inputGet', converted ? converted.toFixed(6) : 0);
     const totals = generateTotals(inputPay);
@@ -82,6 +84,7 @@ const PanelBuy: React.FC = () => {
 
   const calculateInputPay = useCallback(() => {
     const { inputGet } = getValues();
+    if (inputGet < 0) return;
     const converted = inputGet * price();
     setValue('inputPay', converted ? converted.toFixed(2) : 0);
     const totals = generateTotals(converted);
@@ -108,9 +111,23 @@ const PanelBuy: React.FC = () => {
     calculateInputPay();
   }, [buyWith, calculateInputPay]);
 
+  function confirmForm() {
+    return handleSubmit(({ inputGet, inputPay }) => {
+      setData({
+        action: 'buy',
+        buyWith,
+        getIn,
+        pay: inputPay,
+        get: inputGet,
+        totals,
+      });
+      setOpenModal(true);
+    });
+  }
+
   return (
     <>
-      <CalculatorModal open={openModal} setOpen={setOpenModal} />
+      <CalculatorModal open={openModal} setOpen={setOpenModal} data={data!} />
       <div className="grid grid-cols-8 auto-rows-min gap-y-6 py-8 md:py-4">
         <div className="col-span-full flex flex-col md:flex-row justify-center">
           <div className="w-full md:w-1/2 grid grid-cols-5 gap-x-5 md:flex md:flex-col items-start md:items-center px-6">
@@ -135,9 +152,9 @@ const PanelBuy: React.FC = () => {
               )}
             />
             {errors.inputPay?.message && (
-              <label className="label">
+              <label className="label max-w-[200px] text-center">
                 <span className="label-text-alt text-red-400">
-                  {errors.inputPay?.message}
+                  {t('main:calculator.errors.input')}
                 </span>
               </label>
             )}
@@ -163,9 +180,9 @@ const PanelBuy: React.FC = () => {
               })}
             />
             {errors.inputGet?.message && (
-              <label className="label">
+              <label className="label max-w-[200px] text-center">
                 <span className="label-text-alt text-red-400">
-                  {errors.inputGet?.message}
+                  {t('main:calculator.errors.input')}
                 </span>
               </label>
             )}
@@ -178,7 +195,7 @@ const PanelBuy: React.FC = () => {
           <div className="flex justify-between">
             <span>{t('main:calculator.fees.serviceFees')}</span>
             <span>
-              {totals.fees ? totals.fees.toFixed(2) : 0} {buyWith}
+              {totals ? totals.fees.toFixed(2) : 0} {buyWith}
             </span>
           </div>
           <div className="divider divider-vertical my-0"></div>
@@ -187,13 +204,13 @@ const PanelBuy: React.FC = () => {
               {t('main:calculator.fees.total')}
             </span>
             <span className="text-accent font-bold">
-              {totals.sum ? totals.sum.toFixed(2) : 0} {buyWith}
+              {totals ? totals.sum.toFixed(2) : 0} {buyWith}
             </span>
           </div>
         </div>
         <button
           className="btn btn-primary col-span-full mx-5 md:mx-0 md:col-span-4 md:col-start-3"
-          onClick={() => setOpenModal(true)}
+          onClick={confirmForm()}
         >
           {t('common:button.confirm')}
         </button>

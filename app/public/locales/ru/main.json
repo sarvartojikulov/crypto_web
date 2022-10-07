@@ -20,6 +20,9 @@
       "fees": "сборы",
       "serviceFees": "Плата за сервис",
       "total": "суммарно"
+    },
+    "errors": {
+      "input": "Please provide a valid order amount."
     }
   },
   "about": {

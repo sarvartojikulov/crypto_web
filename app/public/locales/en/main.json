@@ -20,6 +20,9 @@
       "fees": "Fees",
       "serviceFees": "Service fees",
       "total": "total"
+    },
+    "errors": {
+      "input": "Please provide a valid order amount."
     }
   },
   "about": {
