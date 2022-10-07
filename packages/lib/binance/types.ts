@@ -17,6 +17,7 @@ export type TickerAssetsResponse = {
 
 export type Currency = {
   asset: string;
+  type: 'stable' | 'unstable';
   prices: Record<string, number>;
 };
 export type FiatRate = Pick<FiatAsset, 'pair' | 'rate'>;

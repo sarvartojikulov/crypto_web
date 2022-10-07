@@ -27,11 +27,13 @@ const Ticker: React.FC = () => {
 
   const price_list = useMemo(() => {
     const activeCurrency = units[activeUnit];
-    return currencies.courses.map((item) => {
-      const price = item.prices[activeCurrency];
-      const coinData = COINS.find(({ name }) => name == item.asset);
-      return { ...coinData, price };
-    });
+    return currencies.courses
+      .filter((item) => item.type !== 'stable')
+      .map((item) => {
+        const price = item.prices[activeCurrency];
+        const coinData = COINS.find(({ name }) => name == item.asset);
+        return { ...coinData, price };
+      });
   }, [activeUnit, currencies, units]);
 
   return (

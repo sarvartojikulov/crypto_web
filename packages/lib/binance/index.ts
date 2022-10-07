@@ -23,6 +23,8 @@ const SUPPORTED_CRYPTO_ASSETS: Record<string, string> = {
   SOLUSDT: 'Solana',
 };
 
+const SUPPORTED_STABLE_CRYPTO_ASSETS = ['USDT', 'USDC', 'BUSD'];
+
 const MS_PER_SECOND = 1000;
 const UPDATE_LIMIT_IN_SECONDS = 30;
 
@@ -57,7 +59,7 @@ export async function getBinanceData(): Promise<BinanceData> {
     .filter(({ pair }) => SUPPORTED_FIAT_ASSETS[pair])
     .map(({ pair, rate }) => ({ pair, rate }));
 
-  const result = filteredCryptoAssets.map(({ symbol, price }) => {
+  const result: Currency[] = filteredCryptoAssets.map(({ symbol, price }) => {
     const usdPrice = Number(price);
     const values: Record<string, number> = filteredFiatAssets.reduce(
       (acc, { pair, rate }) => {
@@ -71,10 +73,29 @@ export async function getBinanceData(): Promise<BinanceData> {
 
     return {
       asset: SUPPORTED_CRYPTO_ASSETS[symbol],
+      type: 'unstable',
       prices: {
         ...values,
       },
     };
   });
+
+  SUPPORTED_STABLE_CRYPTO_ASSETS.forEach((asset) => {
+    const prices: Record<string, number> = filteredFiatAssets.reduce(
+      (acc, { pair, rate }) => {
+        const name = pair.split('_')[0];
+        return { ...acc, [name]: rate };
+      },
+      {}
+    );
+    prices['USD'] = 1;
+
+    result.push({
+      asset: asset,
+      type: 'stable',
+      prices,
+    });
+  });
+
   return { currencies: result, fiatRates: filteredFiatAssets };
 }
