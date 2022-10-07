@@ -24,16 +24,11 @@ const LandingSection: React.FC = () => {
       <p className="row-start-2 col-span-full md:col-span-4 lg:col-span-5 text-sm md:text-md lg:text-lg mb-8 md:mb-0">
         {t('landing.description')}
       </p>
-      <Link href="/how-it-works">
-        <button className="col-span-2 row-start-3 btn btn-active btn-primary h-14">
-          {t('landing.links.howItWorks')}
-        </button>
-      </Link>
-      <Link href="/contact">
-        <button className="col-span-2 row-start-3 btn btn-outline btn-primary h-14">
-          {t('landing.links.contact')}
-        </button>
-      </Link>
+      <button className="col-span-3 mt-4 row-start-3 btn btn-active btn-primary h-14">
+        <a target="_blank" rel="noreferrer" href="https://t.me/kryptoswappp">
+          {t('landing.links.writeUs')}
+        </a>
+      </button>
       <div className="col-span-full md:row-span-3 md:col-span-3 lg:col-span-5 px-10 md:px-0 lg:px-12 mt-8 md:mt-0">
         <Ticker />
       </div>

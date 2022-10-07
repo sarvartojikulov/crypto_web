@@ -24,7 +24,7 @@ const Footer = () => {
             <a
               target="_blank"
               rel="noreferrer"
-              href="https://www.instagram.com/krypto.swap/"
+              href="https://t.me/kryptoswappp"
               className="cursor-pointer"
             >
               <IconTelegram />
