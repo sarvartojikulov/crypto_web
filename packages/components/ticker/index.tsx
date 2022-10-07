@@ -7,15 +7,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const COINS = [
   {
-    name: 'Bitcoin',
+    name: 'BTC',
     icon: <IconBitcoin />,
   },
   {
-    name: 'Ethereum',
+    name: 'ETH',
     icon: <IconEthereum />,
   },
   {
-    name: 'Solana',
+    name: 'SOL',
     icon: <IconSolana className="w-6" />,
   },
 ];

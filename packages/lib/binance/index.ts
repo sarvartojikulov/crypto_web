@@ -18,9 +18,9 @@ const SUPPORTED_FIAT_ASSETS: Record<string, string> = {
 };
 
 const SUPPORTED_CRYPTO_ASSETS: Record<string, string> = {
-  BTCUSDT: 'Bitcoin',
-  ETHUSDT: 'Ethereum',
-  SOLUSDT: 'Solana',
+  BTCUSDT: 'BTC',
+  ETHUSDT: 'ETH',
+  SOLUSDT: 'SOL',
 };
 
 const SUPPORTED_STABLE_CRYPTO_ASSETS = ['USDT', 'USDC', 'BUSD'];
