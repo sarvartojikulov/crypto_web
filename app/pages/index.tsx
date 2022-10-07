@@ -2,7 +2,6 @@ import React from 'react';
 
 import { BoxSectionAbout } from '@streact/components-box-sections';
 import Calculator from '@streact/components-calculator';
-import Modal from '@streact/components-modal';
 import SectionBackground from '@streact/components-section-background';
 import Ticker from '@streact/components-ticker';
 import Layout from '@streact/core-layout';
@@ -12,7 +11,6 @@ import { AppDataProvider } from '@streact/services-context';
 import { GetServerSideProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Link from 'next/link';
 
 const LandingSection: React.FC = () => {
   const { t } = useTranslation('main');

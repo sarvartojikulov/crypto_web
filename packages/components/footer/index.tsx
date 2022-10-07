@@ -12,10 +12,10 @@ const Footer = () => {
         © Krypto Swap. All rights reserved
       </div>
       <div className="col-span-full row-start-1 md:row-start-1 md:col-span-2 md:col-start-4 mx-auto">
-        <Link href="/" className="cursor-pointer">
-          <React.Fragment>
+        <Link href="/">
+          <span className="cursor-pointer">
             <Logo width={200} />
-          </React.Fragment>
+          </span>
         </Link>
       </div>
       <div className="col-span-full md:col-span-2 md:col-start-7 mt-auto mx-auto md:mx-0">
