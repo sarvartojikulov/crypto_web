@@ -31,7 +31,7 @@
       "body": "We will contact you as soon as possible!"
     },
     "error": {
-      "title": "Przepraszamy, nie mogliśmy przetworzyć Twojej prośby!",
+      "title": "Sorry, we were unable to process your request!",
       "body": "Please contact us by phone, click on the button below and you will get our contact credentials"
     }
   },

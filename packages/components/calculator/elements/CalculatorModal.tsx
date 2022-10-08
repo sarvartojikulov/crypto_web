@@ -137,7 +137,7 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="px-8 py-6 space-y-2 flex flex-col"
+            className="px-8 py-6 space-y-2 flex flex-col rounded-3xl"
           >
             {error ? (
               <>
