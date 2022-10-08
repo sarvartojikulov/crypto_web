@@ -33,7 +33,6 @@ const Navbar = () => {
               <li>
                 <Link href="/about">{t('navbar.links.about')}</Link>
               </li>
-
               <li>
                 <Link href="/how-it-works">{t('navbar.links.howItWorks')}</Link>
               </li>
@@ -45,9 +44,9 @@ const Navbar = () => {
         </div>
         <div className="navbar-center w-44 cursor-pointer">
           <Link href="/">
-            <React.Fragment>
+            <span>
               <Logo />
-            </React.Fragment>
+            </span>
           </Link>
         </div>
         <div className="navbar-end">
@@ -63,7 +62,7 @@ const Navbar = () => {
                 <span onClick={() => changeLocale('en')}>English</span>
               </li>
               <li>
-                <span onClick={() => changeLocale('pl')}>Poland</span>
+                <span onClick={() => changeLocale('pl')}>Polish</span>
               </li>
               <li>
                 <span onClick={() => changeLocale('ru')}>Russian</span>
