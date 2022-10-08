@@ -9,6 +9,7 @@ import IconLegal from './IconLegal';
 import IconLocation from './IconLocation';
 import IconMail from './IconMail';
 import IconPhone from './IconPhone';
+import IconRingPhone from './IconRingPhone';
 import IconSecure from './IconSecure';
 import IconSolana from './IconSolana';
 import IconTelegram from './IconTelegram';
@@ -31,5 +32,6 @@ export {
   IconBuilding,
   IconLocation,
   IconMail,
+  IconRingPhone,
   Logo,
 };

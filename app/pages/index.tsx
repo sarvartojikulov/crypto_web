@@ -4,6 +4,7 @@ import { BoxSectionAbout } from '@streact/components-box-sections';
 import Calculator from '@streact/components-calculator';
 import SectionBackground from '@streact/components-section-background';
 import Ticker from '@streact/components-ticker';
+import { IconRingPhone } from '@streact/core-assets';
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
 import { AppData, getAppData } from '@streact/services-app-data';
@@ -22,11 +23,27 @@ const LandingSection: React.FC = () => {
       <p className="row-start-2 col-span-full md:col-span-4 lg:col-span-5 text-sm md:text-md lg:text-lg mb-8 md:mb-0">
         {t('landing.description')}
       </p>
-      <button className="col-span-3 mt-4 row-start-3 btn btn-active btn-primary h-14">
-        <a target="_blank" rel="noreferrer" href="https://t.me/kryptoswappp">
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href="https://t.me/kryptoswappp"
+        className="col-span-2 md:col-span-3 row-start-3"
+      >
+        <button className="btn btn-active btn-primary w-full">
           {t('landing.links.writeUs')}
-        </a>
-      </button>
+        </button>
+      </a>
+      <a
+        className="col-span-2 row-start-3 "
+        target="_blank"
+        rel="noreferrer"
+        href="https://t.me/kryptoswappp"
+      >
+        <button className="group btn btn-primary btn-outline space-x-3 md:space-x-2 w-full justify-center items-center md:justify-start md:w-auto ">
+          <IconRingPhone className="fill-primary group-hover:fill-base-300 h-full w-auto py-3 md:py-3.5" />
+          <span>{t('landing.links.call')}</span>
+        </button>
+      </a>
       <div className="col-span-full md:row-span-3 md:col-span-3 lg:col-span-5 px-10 md:px-0 lg:px-12 mt-8 md:mt-0">
         <Ticker />
       </div>
