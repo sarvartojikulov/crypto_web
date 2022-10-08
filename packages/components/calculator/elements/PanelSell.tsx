@@ -116,7 +116,15 @@ const PanelSell: React.FC = () => {
       }
     });
     return () => subscription.unsubscribe();
-  }, [watch, calculateInputGet, calculateInputPay, price]);
+  }, [
+    watch,
+    calculateInputGet,
+    calculateInputPay,
+    price,
+    errors,
+    setError,
+    clearErrors,
+  ]);
 
   useEffect(() => {
     calculateInputGet();
@@ -166,8 +174,8 @@ const PanelSell: React.FC = () => {
               )}
             />
             {errors.inputPay?.message && (
-              <label className="label">
-                <span className="label-text-alt text-red-400">
+              <label className="label text-center col-span-full md:max-w-[200px]">
+                <span className="label-text-alt text-red-400 mx-auto">
                   {t('main:calculator.errors.input')}
                 </span>
               </label>
@@ -193,8 +201,8 @@ const PanelSell: React.FC = () => {
               })}
             />
             {errors.inputGet?.message && (
-              <label className="label">
-                <span className="label-text-alt text-red-400">
+              <label className="label text-center col-span-full md:max-w-[200px]">
+                <span className="label-text-alt text-red-400 mx-auto">
                   {t('main:calculator.errors.input')}
                 </span>
               </label>

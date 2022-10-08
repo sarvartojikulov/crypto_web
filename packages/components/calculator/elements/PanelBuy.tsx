@@ -99,7 +99,7 @@ const PanelBuy: React.FC = () => {
       if (name === 'inputPay' && activeInput.current === 'pay') {
         const inValid = validateInputs(value.inputPay);
         if (inValid) return setError(name, { message: 'invalid' });
-        if (errors.inputPay?.message) {
+        if (errors.inputPay) {
           clearErrors(name);
         }
         calculateInputGet();
@@ -107,14 +107,22 @@ const PanelBuy: React.FC = () => {
       if (name === 'inputGet' && activeInput.current === 'get') {
         const inValid = validateInputs(value.inputGet);
         if (inValid) return setError(name, { message: 'invalid' });
-        if (errors.inputGet?.message) {
+        if (errors.inputGet) {
           clearErrors(name);
         }
         calculateInputPay();
       }
     });
     return () => subscription.unsubscribe();
-  }, [watch, calculateInputGet, calculateInputPay, price]);
+  }, [
+    watch,
+    calculateInputGet,
+    calculateInputPay,
+    price,
+    errors,
+    clearErrors,
+    setError,
+  ]);
 
   useEffect(() => {
     calculateInputGet();
