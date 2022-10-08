@@ -16,7 +16,7 @@ const BoxSectionContact = () => {
 
   return (
     <>
-      <Box className="col-span-full sm:col-span-2 md:col-span-4 lg:col-span-3 py-10">
+      <Box className="col-span-full sm:col-span-2 md:col-span-4 lg:col-span-3 pt-10 pb-4">
         <div className="card-body space-y-3">
           <div className="mx-auto">
             <IconPhone className="w-14 h-14 lg:w-18 lg:h-18" />
@@ -27,7 +27,7 @@ const BoxSectionContact = () => {
           </p>
         </div>
       </Box>
-      <Box className="col-span-full sm:col-span-2 md:col-span-4 lg:col-span-3 py-10">
+      <Box className="col-span-full sm:col-span-2 md:col-span-4 lg:col-span-3 pt-10 pb-4">
         <div className="card-body space-y-3">
           <div className="mx-auto">
             <IconBuilding className="w-14 h-14 lg:w-18 lg:h-18" />
@@ -42,7 +42,7 @@ const BoxSectionContact = () => {
           </div>
         </div>
       </Box>
-      <Box className="col-span-full sm:col-span-2 md:col-span-4 lg:col-span-3 py-10">
+      <Box className="col-span-full sm:col-span-2 md:col-span-4 lg:col-span-3 pt-10 pb-4">
         <div className="card-body space-y-3">
           <div className="mx-auto">
             <IconLocation className="w-14 h-14 lg:w-18 lg:h-18" />
