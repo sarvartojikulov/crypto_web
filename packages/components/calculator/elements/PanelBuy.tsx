@@ -10,6 +10,7 @@ import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 
 import { Totals, DataToSend } from '../types';
+import { validateInputs } from '../utils/validation';
 
 import CalculatorModal from './CalculatorModal';
 
@@ -36,6 +37,8 @@ const PanelBuy: React.FC = () => {
     watch,
     setValue,
     getValues,
+    setError,
+    clearErrors,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -75,17 +78,17 @@ const PanelBuy: React.FC = () => {
 
   const calculateInputGet = useCallback(() => {
     const { inputPay } = getValues();
-    if (inputPay < 0) return;
-    const converted = inputPay / price();
+    const num = Number(inputPay);
+    const converted = num / price();
     setValue('inputGet', converted ? converted.toFixed(6) : 0);
-    const totals = generateTotals(inputPay);
+    const totals = generateTotals(num);
     setTotals(totals);
   }, [price, getValues, setValue, admin.calculator.percent]);
 
   const calculateInputPay = useCallback(() => {
     const { inputGet } = getValues();
-    if (inputGet < 0) return;
-    const converted = inputGet * price();
+    const num = Number(inputGet);
+    const converted = num * price();
     setValue('inputPay', converted ? converted.toFixed(2) : 0);
     const totals = generateTotals(converted);
     setTotals(totals);
@@ -94,9 +97,19 @@ const PanelBuy: React.FC = () => {
   useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === 'inputPay' && activeInput.current === 'pay') {
+        const inValid = validateInputs(value.inputPay);
+        if (inValid) return setError(name, { message: 'invalid' });
+        if (errors.inputPay?.message) {
+          clearErrors(name);
+        }
         calculateInputGet();
       }
       if (name === 'inputGet' && activeInput.current === 'get') {
+        const inValid = validateInputs(value.inputGet);
+        if (inValid) return setError(name, { message: 'invalid' });
+        if (errors.inputGet?.message) {
+          clearErrors(name);
+        }
         calculateInputPay();
       }
     });
@@ -144,7 +157,6 @@ const PanelBuy: React.FC = () => {
               type="tel"
               placeholder="0.000"
               {...register('inputPay', {
-                valueAsNumber: true,
                 onChange: () => setActiveInput('pay'),
               })}
               className={classNames(
@@ -152,8 +164,8 @@ const PanelBuy: React.FC = () => {
               )}
             />
             {errors.inputPay?.message && (
-              <label className="label max-w-[200px] text-center">
-                <span className="label-text-alt text-red-400">
+              <label className="label text-center col-span-full md:max-w-[200px]">
+                <span className="label-text-alt text-red-400 mx-auto">
                   {t('main:calculator.errors.input')}
                 </span>
               </label>
@@ -175,13 +187,12 @@ const PanelBuy: React.FC = () => {
               className="input input-primary h-[42px] mt-1 w-full md:max-w-[200px] col-span-3"
               placeholder="0.000"
               {...register('inputGet', {
-                valueAsNumber: true,
                 onChange: () => setActiveInput('get'),
               })}
             />
             {errors.inputGet?.message && (
-              <label className="label max-w-[200px] text-center">
-                <span className="label-text-alt text-red-400">
+              <label className="label text-center col-span-full md:max-w-[200px]">
+                <span className="label-text-alt text-red-400 mx-auto">
                   {t('main:calculator.errors.input')}
                 </span>
               </label>

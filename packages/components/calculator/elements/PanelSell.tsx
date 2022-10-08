@@ -10,6 +10,7 @@ import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 
 import { DataToSend, Totals } from '../types';
+import { validateInputs } from '../utils/validation';
 
 import CalculatorModal from './CalculatorModal';
 
@@ -36,6 +37,8 @@ const PanelSell: React.FC = () => {
     watch,
     setValue,
     getValues,
+    setError,
+    clearErrors,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -49,19 +52,19 @@ const PanelSell: React.FC = () => {
     if (!inputGet) {
       return { fees: 0, sum: 0 };
     }
+    const num = Number(inputGet);
     let fees: number;
     if (getIn.toLowerCase() === 'usd') {
-      fees = inputGet > 1000 ? inputGet * admin.calculator.percent : 30;
+      fees = num > 1000 ? num * admin.calculator.percent : 30;
     } else {
       const { rate } = fiatRates.find(({ pair }) =>
         pair.toLowerCase().includes(getIn.toLowerCase())
       )!;
 
-      const inputInUsd = inputGet / rate;
-      fees =
-        inputInUsd > 1000 ? inputGet * admin.calculator.percent : 30 * rate;
+      const inputInUsd = num / rate;
+      fees = inputInUsd > 1000 ? num * admin.calculator.percent : 30 * rate;
     }
-    const sum = inputGet + fees;
+    const sum = num + fees;
     return { fees, sum };
   };
 
@@ -77,7 +80,8 @@ const PanelSell: React.FC = () => {
 
   const calculateInputGet = useCallback(() => {
     const { inputPay } = getValues();
-    const converted = inputPay * price();
+    const num = Number(inputPay);
+    const converted = num * price();
     setValue('inputGet', converted ? converted.toFixed(2) : 0);
     const totals = generateTotals();
     setTotals(totals);
@@ -85,7 +89,8 @@ const PanelSell: React.FC = () => {
 
   const calculateInputPay = useCallback(() => {
     const { inputGet } = getValues();
-    const converted = inputGet / price();
+    const num = Number(inputGet);
+    const converted = num / price();
     setValue('inputPay', converted ? converted.toFixed(6) : 0);
     const totals = generateTotals();
     setTotals(totals);
@@ -94,9 +99,19 @@ const PanelSell: React.FC = () => {
   useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === 'inputPay' && activeInput.current === 'pay') {
+        const inValid = validateInputs(value.inputPay);
+        if (inValid) return setError(name, { message: 'invalid' });
+        if (errors.inputPay?.message) {
+          clearErrors(name);
+        }
         calculateInputGet();
       }
       if (name === 'inputGet' && activeInput.current === 'get') {
+        const inValid = validateInputs(value.inputGet);
+        if (inValid) return setError(name, { message: 'invalid' });
+        if (errors.inputGet?.message) {
+          clearErrors(name);
+        }
         calculateInputPay();
       }
     });
@@ -144,7 +159,6 @@ const PanelSell: React.FC = () => {
               type="tel"
               placeholder="0.000"
               {...register('inputPay', {
-                valueAsNumber: true,
                 onChange: () => setActiveInput('pay'),
               })}
               className={classNames(
@@ -175,7 +189,6 @@ const PanelSell: React.FC = () => {
               className="input input-primary h-[42px] mt-1 w-full md:max-w-[200px] col-span-3"
               placeholder="0.000"
               {...register('inputGet', {
-                valueAsNumber: true,
                 onChange: () => setActiveInput('get'),
               })}
             />
