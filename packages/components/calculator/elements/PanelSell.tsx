@@ -162,7 +162,7 @@ const PanelSell: React.FC = () => {
               onChange={setBuyWith}
             />
             <input
-              type="tel"
+              type="text"
               placeholder="0.000"
               {...register('inputPay', {
                 valueAsNumber: true,

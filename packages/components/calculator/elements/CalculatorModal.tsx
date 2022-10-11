@@ -108,7 +108,7 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
                   <span className="label-text">{t('labels.email')}</span>
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   className="input input-accent h-12 w-full"
                   {...register('email')}
                 />

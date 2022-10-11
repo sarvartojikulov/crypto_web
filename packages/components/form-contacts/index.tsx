@@ -119,7 +119,7 @@ const FormContacts: React.FC = () => {
               <span className="label-text">{t('labels.email')}</span>
             </label>
             <input
-              type="text"
+              type="email"
               placeholder="Email"
               className="input input-primary w-full"
               {...register('email')}
