@@ -78,17 +78,15 @@ const PanelBuy: React.FC = () => {
 
   const calculateInputGet = useCallback(() => {
     const { inputPay } = getValues();
-    const num = Number(inputPay);
-    const converted = num / price();
+    const converted = inputPay / price();
     setValue('inputGet', converted ? converted.toFixed(6) : 0);
-    const totals = generateTotals(num);
+    const totals = generateTotals(inputPay);
     setTotals(totals);
   }, [price, getValues, setValue, admin.calculator.percent]);
 
   const calculateInputPay = useCallback(() => {
     const { inputGet } = getValues();
-    const num = Number(inputGet);
-    const converted = num * price();
+    const converted = inputGet * price();
     setValue('inputPay', converted ? converted.toFixed(2) : 0);
     const totals = generateTotals(converted);
     setTotals(totals);
@@ -133,6 +131,8 @@ const PanelBuy: React.FC = () => {
   }, [buyWith, calculateInputPay]);
 
   function confirmForm() {
+    console.log(errors);
+
     return handleSubmit(({ inputGet, inputPay }) => {
       setData({
         action: 'buy',
@@ -165,6 +165,7 @@ const PanelBuy: React.FC = () => {
               type="tel"
               placeholder="0.000"
               {...register('inputPay', {
+                valueAsNumber: true,
                 onChange: () => setActiveInput('pay'),
               })}
               className={classNames(
@@ -195,6 +196,7 @@ const PanelBuy: React.FC = () => {
               className="input input-primary h-[42px] mt-1 w-full md:max-w-[200px] col-span-3"
               placeholder="0.000"
               {...register('inputGet', {
+                valueAsNumber: true,
                 onChange: () => setActiveInput('get'),
               })}
             />

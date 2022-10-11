@@ -44,8 +44,8 @@ const Navbar = () => {
         </div>
         <div className="navbar-center w-44 cursor-pointer">
           <Link href="/">
-            <span>
-              <Logo />
+            <span className="w-44">
+              <Logo className="w-full" />
             </span>
           </Link>
         </div>

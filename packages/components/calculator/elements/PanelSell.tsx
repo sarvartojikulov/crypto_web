@@ -80,8 +80,7 @@ const PanelSell: React.FC = () => {
 
   const calculateInputGet = useCallback(() => {
     const { inputPay } = getValues();
-    const num = Number(inputPay);
-    const converted = num * price();
+    const converted = inputPay * price();
     setValue('inputGet', converted ? converted.toFixed(2) : 0);
     const totals = generateTotals();
     setTotals(totals);
@@ -89,8 +88,7 @@ const PanelSell: React.FC = () => {
 
   const calculateInputPay = useCallback(() => {
     const { inputGet } = getValues();
-    const num = Number(inputGet);
-    const converted = num / price();
+    const converted = inputGet / price();
     setValue('inputPay', converted ? converted.toFixed(6) : 0);
     const totals = generateTotals();
     setTotals(totals);
@@ -167,6 +165,7 @@ const PanelSell: React.FC = () => {
               type="tel"
               placeholder="0.000"
               {...register('inputPay', {
+                valueAsNumber: true,
                 onChange: () => setActiveInput('pay'),
               })}
               className={classNames(
@@ -197,6 +196,7 @@ const PanelSell: React.FC = () => {
               className="input input-primary h-[42px] mt-1 w-full md:max-w-[200px] col-span-3"
               placeholder="0.000"
               {...register('inputGet', {
+                valueAsNumber: true,
                 onChange: () => setActiveInput('get'),
               })}
             />

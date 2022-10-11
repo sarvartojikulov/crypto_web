@@ -25,9 +25,9 @@ const Footer = () => {
               target="_blank"
               rel="noreferrer"
               href="https://t.me/kryptoswappp"
-              className="cursor-pointer"
+              className="cursor-pointer h-full"
             >
-              <IconTelegram className="fill-white" />
+              <IconTelegram />
             </a>
           </li>
           <li>
