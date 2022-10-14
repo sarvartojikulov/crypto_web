@@ -19,15 +19,15 @@
   "faq": [
     {
       "header": "Prowizje i opłaty",
-      "body": "Bitcoin Między 1000 PLN a 10000 PLN 3,5% względem ceny giełdowej\nBitcoin Powyżej 10000 PLN 3,5% względem ceny giełdowej.\nBitcoin AML od 70 000 do 500 000 PLN 3% względem ceny giełdowej.\nBitcoin AML powyżej 500 000 PLN Do negocjacji.\nInne Kryptowaluty Między 1000 PLN a 10000 PLN 3,5% względem ceny giełdowej\nInne Kryptowaluty Powyżej 10000 PLN 3,5% względem ceny giełdowej.\nInne Kryptowaluty AML od 70 000 do 500 000 PLN 3% względem ceny giełdowej.\nInne Kryptowaluty AML powyżej 500 000 PLN Do negocjacji"
+      "body": "<ul><li>Bitcoin Między 1000 PLN a 10000 PLN 3,5% względem ceny giełdowej</li><li>Bitcoin Powyżej 10000 PLN 3,5% względem ceny giełdowej.</li><li>Bitcoin AML od 70 000 do 500 000 PLN 3% względem ceny giełdowej.</li><li>Bitcoin AML powyżej 500 000 PLN Do negocjacji.</li><li>Inne Kryptowaluty Między 1000 PLN a 10000 PLN 3,5% względem ceny giełdowej</li><li>Inne Kryptowaluty Powyżej 10000 PLN 3,5% względem ceny giełdowej.</li><li>Inne Kryptowaluty AML od 70 000 do 500 000 PLN 3% względem ceny giełdowej.</li><li>Inne Kryptowaluty AML powyżej 500 000 PLN Do negocjacji</li></ul>"
     },
     {
       "header": "Procedura zakupu",
-      "body": "Przychodzi Pan/Pani do wybranego biura z gotówką.\nPodaje Pan/Pani portfel do wpłaty Bitcoin lub innej kryptowaluty\nPo zaakceptowaniu kursu i ustaleniu ilości kupowanych BTC lub innej kryptowaluty przelewamy środki na wskazany portfel."
+      "body": "<ul><li>Przychodzi Pan/Pani do wybranego biura z gotówką.</li><li>Podaje Pan/Pani portfel do wpłaty Bitcoin lub innej kryptowaluty</li><li>Po zaakceptowaniu kursu i ustaleniu ilości kupowanych BTC lub innej kryptowaluty przelewamy środki na wskazany portfel.</li></ul>"
     },
     {
       "header": "Procedura sprzedaży",
-      "body": "Przychodzi Pan/Pani do wybranego biura z BTC lub inną kryptowalutą.\nPo zaakceptowaniu kursu i ilości sprzedawanej kryptowaluty, wysyła Pan/Pani Bitcoin lub inną kryptowalutę na wskazany przez pracownika adres.\nW przypadku BTC czekamy na 1 potwierdzenie w sieci Blockchain, w przypadku innej kryptowaluty czekamy do momentu zaksięgowania transakcji na naszym portfelu i wtedy wydajemy gotówkę\nW przypadku sprzedaży kryptowaluty u przedstawiciela, musi być ona zawsze wysłana wcześniej. W przypadku zakupu kryptowaluty wysyłamy na wskazany portfel w momencie, gdy przedstawiciel potwierdzi transakcję."
+      "body": "<ul><li>Przychodzi Pan/Pani do wybranego biura z BTC lub inną kryptowalutą.</li><li>Po zaakceptowaniu kursu i ilości sprzedawanej kryptowaluty, wysyła Pan/Pani Bitcoin lub inną kryptowalutę na wskazany przez pracownika adres.</li><li>W przypadku BTC czekamy na 1 potwierdzenie w sieci Blockchain, w przypadku innej kryptowaluty czekamy do momentu zaksięgowania transakcji na naszym portfelu i wtedy wydajemy gotówkę</li></ul>W przypadku sprzedaży kryptowaluty u przedstawiciela, musi być ona zawsze wysłana wcześniej. W przypadku zakupu kryptowaluty wysyłamy na wskazany portfel w momencie, gdy przedstawiciel potwierdzi transakcję."
     },
     {
       "header": "Ile maksymalnie mogę wymienić u was Bitcoinów lub innej kryptowaluty?",
@@ -43,7 +43,7 @@
     },
     {
       "header": "Czy można wymienić kryptowaluty anonimowo?",
-      "body": "\nWeryfikację z dokumentem tożsamości przeprowadzamy w przypadku, gdy kwotaprzekracza kwotę 1000 euro. W przypadku wymiany kwoty do 1000 euro dowód tożsamości nie jest konieczny."
+      "body": "<br>Weryfikację z dokumentem tożsamości przeprowadzamy w przypadku, gdy kwotaprzekracza kwotę 1000 euro. W przypadku wymiany kwoty do 1000 euro dowód tożsamości nie jest konieczny."
     },
     {
       "header": "Czy skupujecie/sprzedajecie inne kryptowaluty np. ETH czy BTC?",

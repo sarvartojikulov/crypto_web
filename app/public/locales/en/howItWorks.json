@@ -19,59 +19,59 @@
   "faq": [
     {
       "header": "Commissions and fees",
-      "body": "Bitcoin Between PLN 1,000 and PLN 10,000 3.5% relative to the stock price\nBitcoin Above PLN 10,000 3.5% relative to the stock price.\nBitcoin AML from 70,000 to 500,000 PLN 3% relative to the stock price.\nBitcoin AML over PLN 500,000. Negotiated.\nOther Cryptocurrencies Between PLN 1,000 and PLN 10,000 3.5% relative to the stock price\nOther Cryptocurrencies Above PLN 10,000 3.5% relative to the stock price.\nOther AML Cryptocurrencies from PLN 70,000 to 500,000 3% relative to the stock price.\nOther AML Cryptocurrencies over PLN 500,000 Negotiated"
+      "body": "<ul><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Bitcoin Between PLN 1,000 and PLN 10,000 3.5% relative to the stock price</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Bitcoin Above PLN 10,000 3.5% relative to the stock price.</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Bitcoin AML from 70,000 to 500,000 PLN 3% relative to the stock price.</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Bitcoin AML over PLN 500,000. Negotiated.</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Other Cryptocurrencies Between PLN 1,000 and PLN 10,000 3.5% relative to the stock price</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Other Cryptocurrencies Above PLN 10,000 3.5% relative to the stock price.</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Other AML Cryptocurrencies from PLN 70,000 to 500,000 3% relative to the stock price.</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Other AML Cryptocurrencies over PLN 500,000 Negotiated</font></font></li></ul>"
     },
     {
       "header": "Purchase Procedure",
-      "body": "You come to the selected office with cash.\nYou provide your Bitcoin or other cryptocurrency payment wallet\nAfter accepting the course and determining the number of BTC or other cryptocurrency purchased, we transfer funds to the indicated portfolio."
+      "body": "<ul><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">You come to the selected office with cash.</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">You provide your Bitcoin or other cryptocurrency payment wallet</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">After accepting the course and determining the number of BTC or other cryptocurrency purchased, we transfer funds to the indicated portfolio.</font></font></li></ul>"
     },
     {
       "header": "Sales Procedure",
-      "body": "You come to the selected office with BTC or other cryptocurrency.\nAfter accepting the course and quantity of cryptocurrency sold, you send Mr Bitcoin or another cryptocurrency to the address provided by the employee.\nIn the case of BTC, we are waiting for 1 confirmation in the Blockchain network, in the case of another cryptocurrency we wait until the transaction is credited to our portfolio and then we spend cash\nIf a cryptocurrency is sold to a representative, it must always be sent earlier. If you purchase cryptocurrency, we send it to the indicated portfolio when the representative confirms the transaction."
+      "body": "<ul><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">You come to the selected office with BTC or other cryptocurrency.</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">After accepting the course and quantity of cryptocurrency sold, you send Mr Bitcoin or another cryptocurrency to the address provided by the employee.</font></font></li><li><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">In the case of BTC, we are waiting for 1 confirmation in the Blockchain network, in the case of another cryptocurrency we wait until the transaction is credited to our portfolio and then we spend cash</font></font></li></ul><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">If a cryptocurrency is sold to a representative, it must always be sent earlier. If you purchase cryptocurrency, we send it to the indicated portfolio when the representative confirms the transaction.</font></font>"
     },
     {
       "header": "How much can I exchange Bitcoins or other cryptocurrencies for you?",
-      "body": "There is no daily limit for replacing cryptocurrencies. However, it is always worth warning us about exchanging more so that we can prepare for such an exchange."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">There is no daily limit for replacing cryptocurrencies. However, it is always worth warning us about exchanging more so that we can prepare for such an exchange.</font></font>"
     },
     {
       "header": "Do I have to announce myself?",
-      "body": "Telephone contact is always welcome before the visit. We will be able to specify the exchange conditions and provide comfortable conditions for the customer."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Telephone contact is always welcome before the visit. We will be able to specify the exchange conditions and provide comfortable conditions for the customer.</font></font>"
     },
     {
       "header": "What is AML?",
-      "body": "AML is an abbreviation of the Anti - Money Laundering phrase, which applies to all activities undertaken by organizations providing financial services ( mainly by banks ), aimed at eliminating the phenomenon of money laundering."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">AML is an abbreviation of the Anti-Money Laundering phrase, which applies to all activities undertaken by organizations providing financial services ( mainly by banks ), aimed at eliminating the phenomenon of money laundering.</font></font>"
     },
     {
       "header": "Can cryptocurrencies be replaced anonymously?",
-      "body": "\nWe carry out verification with an identity document if the amount exceeds EUR 1,000. An ID card is not necessary when exchanging up to EUR 1,000."
+      "body": "<br><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">We carry out verification with an identity document if the amount exceeds EUR 1,000. An ID card is not necessary when exchanging up to EUR 1,000.</font></font>"
     },
     {
       "header": "Do you buy / sell other cryptocurrencies, e.g. ETH or BTC?",
-      "body": "We currently trade Bitcoin ( BTC ), Ethereum ( ETH ), USDT. We encourage you to observe our profile on Facebook."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">We currently trade Bitcoin ( BTC ), Ethereum ( ETH ), USDT. We encourage you to observe our profile on Facebook.</font></font>"
     },
     {
       "header": "Do you reach customers?",
-      "body": "Yes, however, each access to the customer is determined separately. We approach each accident individually."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Yes, however, each access to the customer is determined separately. We approach each accident individually.</font></font>"
     },
     {
       "header": "Can several people send BTC / ETH / USDT from one wallet or can I send it myself from several wallets?",
-      "body": "Yes, it doesn't matter to us how many wallets the funds are sent from."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Yes, it doesn't matter to us how many wallets the funds are sent from.</font></font>"
     },
     {
       "header": "When will I receive cash?",
-      "body": "We pay cash immediately, after receiving 1 confirmation on blockchain in the case of BTC, in the case of other cryptocurrencies we are waiting for posting on our wallet."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">We pay cash immediately, after receiving 1 confirmation on blockchain in the case of BTC, in the case of other cryptocurrencies we are waiting for posting on our wallet.</font></font>"
     },
     {
       "header": "When can I send you BTC / ETH / USDT?",
-      "body": "You can send cryptocurrencies both before coming to the office and being in the office. However, we prefer email contact ( address sending and setting the ) course, which significantly speeds up the exchange of BTC or other cryptocurrency to fiat."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">You can send cryptocurrencies both before coming to the office and being in the office. However, we prefer email contact ( address sending and setting the ) course, which significantly speeds up the exchange of BTC or other cryptocurrency to fiat.</font></font>"
     },
     {
       "header": "How do I get the BTC / ETH / USDT payment address?",
-      "body": "You can get the address by sending us an e-mail to biuro.kryptoswap@gmail.com or directly in one of the offices. We give it as both a string and a QR code."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">You can get the address by sending us an email to biuro.kryptoswap@gmail.com or directly at one of the offices. We give it as both a string and a QR code.</font></font>"
     },
     {
       "header": "Is the replacement of BTC or other cryptocurrency in an exchange office legal?",
-      "body": "Of course it's legal. We are a registered company in Poland that issues documents for each transaction. In addition, according to the position of the Polish Financial Supervision Authority, there are no provisions prohibiting the operation as cryptocurrency exchange offices in the Polish legal system."
+      "body": "<font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">Of course it's legal. We are a registered company in Poland that issues documents for each transaction. In addition, according to the position of the Polish Financial Supervision Authority, there are no provisions prohibiting the operation as cryptocurrency exchange offices in the Polish legal system.</font></font>"
     }
   ]
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
 import { IconDropdown } from '@streact/core-assets';
 import cn from 'classnames';
+import parse from 'html-react-parser';
 
 type AccordionProps = {
   content: { header: string; body: string }[];
@@ -38,8 +39,8 @@ const Accordion: React.FC<AccordionProps> = ({ content }) => {
                   leaveFrom="transform scale-100 opacity-100"
                   leaveTo="transform scale-95 opacity-0"
                 >
-                  <Disclosure.Panel className="px-4 py-2 text-md text-base-content my-4 bg-base-100 rounded-lg">
-                    {body.replace(/(\r\n|\r|\n)/g, '<br/>')}
+                  <Disclosure.Panel className="px-4 py-2 text-md text-base-content my-4 bg-base-100 rounded-lg prose prose-ul:list-disc max-w-none leading-4">
+                    {parse(body)}
                   </Disclosure.Panel>
                 </Transition>
               </>
