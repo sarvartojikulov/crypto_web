@@ -1,4 +1,21 @@
 {
+  "mainTitle": "How it works?",
+  "content": [
+    {
+      "title": "Do you want to buy Bitcoin or other popular cryptocurrencies like: Ethereum, Litecoin, Tether or USDC? It's easier than online exchange!",
+      "body": [
+        "Come to our exchange office, declare the amount and enter only the address of your wallet. We do not require an identity document for transactions up to EUR 1,000, which will ensure your anonymity.",
+        "After accepting the rate and making the deposit, you will receive the cryptocurrencies in your wallet within minutes."
+      ]
+    },
+    {
+      "title": "Do you want to sell cryptocurrencies? It is quite simple.",
+      "body": [
+        "Make an appointment with us by phone, declare the amount of sale and type of digital currency",
+        "Come to our exchange office, accept the rate and transfer cryptocurrencies to the address provided. After approving the transaction, you will receive cash in your hand."
+      ]
+    }
+  ],
   "faq": [
     {
       "header": "Commissions and fees",

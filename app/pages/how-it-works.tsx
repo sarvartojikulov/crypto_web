@@ -1,3 +1,5 @@
+import { link } from 'fs';
+
 import React, { useMemo } from 'react';
 
 import Accordion from '@streact/components-accordion';
@@ -12,65 +14,49 @@ const HowItWorks: NextPage = () => {
   const { locale } = useRouter();
   const { t } = useTranslation('howItWorks');
 
-  const accordionContent = useMemo(
-    () =>
-      t('faq', { returnObjects: true }) as Array<{
-        header: string;
-        body: string;
-      }>,
-    [locale]
-  );
+  const contents = useMemo(() => {
+    const accordion = t('faq', { returnObjects: true }) as Array<{
+      header: string;
+      body: string;
+    }>;
+    const infos = t('content', { returnObjects: true }) as Array<{
+      title: string;
+      body: string[];
+    }>;
+
+    return { accordion, infos };
+  }, [locale]);
+
   return (
     <Layout
       title="How It Works? | Crypto Asset Exchanger"
       description="How It Works? "
     >
-      <Section className="container pt-10 pb-10 md:pt-20">
-        <article className="col-span-full lg:col-span-10 lg:col-start-2 prose max-w-full prose-h1:mb-6 md:prose-h1:mb-8 prose-h2:mb-6 md:prose-h2:mb-8 prose-h2:text-xl md:prose-h2:text-3xl">
-          <h1 className="">How It Works?</h1>
-          <p className="">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
-            lacus at dui vestibulum convallis. Sed id consequat eros. Proin ut
-            accumsan mauris, id pharetra elit. Etiam porttitor dapibus eros, nec
-            imperdiet erat pellentesque ac. Vestibulum dapibus neque eu nunc
-            malesuada feugiat. Etiam nec dictum neque. Pellentesque vehicula ac
-            nulla vitae rutrum. Proin ultricies posuere sagittis. Suspendisse
-            lobortis diam ut eleifend tempus.
-          </p>
-          <h2 className="">Security</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
-            lacus at dui vestibulum convallis. Sed id consequat eros. Proin ut
-            accumsan mauris, id pharetra elit. Etiam porttitor dapibus eros, nec
-            imperdiet erat pellentesque ac. Vestibulum dapibus neque eu nunc
-            malesuada feugiat. Etiam nec dictum neque. Pellentesque vehicula ac
-            nulla vitae rutrum. Proin ultricies posuere sagittis. Suspendisse
-            lobortis diam ut eleifend tempus.
-          </p>
-          <h2 className="">Legal</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
-            lacus at dui vestibulum convallis. Sed id consequat eros. Proin ut
-            accumsan mauris, id pharetra elit. Etiam porttitor dapibus eros, nec
-            imperdiet erat pellentesque ac. Vestibulum dapibus neque eu nunc
-            malesuada feugiat. Etiam nec dictum neque. Pellentesque vehicula ac
-            nulla vitae rutrum. Proin ultricies posuere sagittis. Suspendisse
-            lobortis diam ut eleifend tempus.
-          </p>
-          <h2 className="">Fast</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
-            lacus at dui vestibulum convallis. Sed id consequat eros. Proin ut
-            accumsan mauris, id pharetra elit. Etiam porttitor dapibus eros, nec
-            imperdiet erat pellentesque ac. Vestibulum dapibus neque eu nunc
-            malesuada feugiat. Etiam nec dictum neque. Pellentesque vehicula ac
-            nulla vitae rutrum. Proin ultricies posuere sagittis. Suspendisse
-            lobortis diam ut eleifend tempus.
-          </p>
-          <div className="col-span-full md:col-span-8 lg:col-start-2">
-            <Accordion content={accordionContent} />
-          </div>
-        </article>
+      <Section className="container pt-10 pb-10 md:pt-20 gap-y-10 auto-rows-max">
+        <h1 className="col-span-full text-center">{t('mainTitle')}</h1>
+        {contents.infos.map(({ title, body }) => {
+          return (
+            <React.Fragment key={title}>
+              <h2 className="col-span-full lg:col-span-10 lg:col-start-2">
+                {title}
+              </h2>
+              <ul className="steps steps-vertical col-span-full md:col-span-8 lg:col-span-8 lg:col-start-3">
+                {body.map((text) => {
+                  return (
+                    <li className="step step-primary first:mb-5" key={text}>
+                      <div className="card w-full bg-base-300 shadow-2xl justify-center items-start text-left p-6">
+                        <p>{text}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </React.Fragment>
+          );
+        })}
+        <div className="col-span-full md:col-span-8 lg:col-start-3">
+          <Accordion content={contents.accordion} />
+        </div>
       </Section>
     </Layout>
   );

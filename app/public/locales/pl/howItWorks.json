@@ -1,4 +1,21 @@
 {
+  "mainTitle": "Jak to działa?",
+  "content": [
+    {
+      "title": "Chcesz kupić Bitcoina lub inne popularne kryptowaluty jak: Ethereum, Litecoin, Tether lub USDC? To prostsze niż wymiana online!",
+      "body": [
+        "Przyjdź do naszego kantoru, zadeklaruj kwotę i podaj jedynie adres swojego portfela. Nie wymagamy okazywania dokumentu tożsamości w przypadku transakcji do 1000 euro, co zapewni Ci anonimowość.",
+        "Po akceptacji kursu i dokonaniu wpłaty, otrzymasz kryptowaluty na swój portfel w ciągu kilku minut."
+      ]
+    },
+    {
+      "title": "Chcesz sprzedać kryptowaluty? Sprawa jest równie prosta!",
+      "body": [
+        "Umów się z nami telefonicznie, zadeklaruj kwotę sprzedaży i rodzaj waluty cyfrowej.",
+        "Przyjdź do naszego kantoru, zaakceptuj kurs i przelej kryptowaluty na wskazany adres. Po zatwierdzeniu transakcji, otrzymasz gotówkę do ręki."
+      ]
+    }
+  ],
   "faq": [
     {
       "header": "Prowizje i opłaty",

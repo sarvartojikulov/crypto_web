@@ -39,7 +39,7 @@ const Accordion: React.FC<AccordionProps> = ({ content }) => {
                   leaveTo="transform scale-95 opacity-0"
                 >
                   <Disclosure.Panel className="px-4 py-2 text-md text-base-content my-4 bg-base-100 rounded-lg">
-                    {body}
+                    {body.replace(/(\r\n|\r|\n)/g, '<br/>')}
                   </Disclosure.Panel>
                 </Transition>
               </>
