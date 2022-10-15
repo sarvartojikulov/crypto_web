@@ -39,7 +39,7 @@ const Accordion: React.FC<AccordionProps> = ({ content }) => {
                   leaveFrom="transform scale-100 opacity-100"
                   leaveTo="transform scale-95 opacity-0"
                 >
-                  <Disclosure.Panel className="px-4 py-2 text-md text-base-content my-4 bg-base-100 rounded-lg prose prose-ul:list-disc max-w-none prose-p:leading-5 prose-p:my-0 prose-li:my-1 leading-4">
+                  <Disclosure.Panel className="px-4 py-2 text-md text-base-content my-4 bg-base-100 rounded-lg prose prose-ul:list-disc max-w-none prose-p:leading-5 prose-p:my-0 prose-li:my-1 prose-ul:pl-4 leading-4">
                     {parse(body)}
                   </Disclosure.Panel>
                 </Transition>
