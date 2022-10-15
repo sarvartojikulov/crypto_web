@@ -2,38 +2,60 @@ import React from 'react';
 
 import { BoxSectionAbout } from '@streact/components-box-sections';
 import SectionBackground from '@streact/components-section-background';
+import { Logo } from '@streact/core-assets';
 import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
 import { GetServerSideProps, NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 
 const About: NextPage = () => {
+  const { t } = useTranslation('about');
   const { locale } = useRouter();
+
+  const steps = React.useMemo(() => {
+    return t('steps', { returnObjects: true }) as Array<
+      { emoji: string; text: string }[]
+    >;
+  }, [locale]);
+
   return (
     <Layout title="About | Crypto Asset Exchanger" description="About us">
       <Section className="container pt-10 md:pt-20">
-        <article className="col-span-full lg:col-span-10 lg:col-start-2 prose max-w-full prose-h1:mb-6 md:prose-h1:mb-8 prose-h2:mb-6 md:prose-h2:mb-8 prose-h2:text-xl md:prose-h2:text-3xl">
-          <h1>What makes us different?</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
-            lacus at dui vestibulum convallis. Sed id consequat eros. Proin ut
-            accumsan mauris, id pharetra elit. Etiam porttitor dapibus eros, nec
-            imperdiet erat pellentesque ac. Vestibulum dapibus neque eu nunc
-            malesuada feugiat. Etiam nec dictum neque. Pellentesque vehicula ac
-            nulla vitae rutrum. Proin ultricies posuere sagittis. Suspendisse
-            lobortis diam ut eleifend tempus.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
-            lacus at dui vestibulum convallis. Sed id consequat eros. Proin ut
-            accumsan mauris, id pharetra elit. Etiam porttitor dapibus eros, nec
-            imperdiet erat pellentesque ac. Vestibulum dapibus neque eu nunc
-            malesuada feugiat. Etiam nec dictum neque. Pellentesque vehicula ac
-            nulla vitae rutrum. Proin ultricies posuere sagittis. Suspendisse
-            lobortis diam ut eleifend tempus.
-          </p>
-        </article>
+        <h1 className="col-span-full text-center">{t('title')}</h1>
+        <div className="col-span-4 col-start-5 h-40">
+          <Logo className="h-full w-full" />
+        </div>
+        <h2 className="col-span-full text-4xl text-center">{t('subtitle')}</h2>
+        <ul className="steps steps-vertical col-span-5 col-start-2 mt-8">
+          {steps[0].map(({ emoji, text }) => (
+            <li
+              data-content=""
+              className="step step-primary first:mb-5"
+              key={text}
+            >
+              <div className="card w-full bg-base-300 shadow-xl text-left p-6 flex flex-row items-center space-x-2">
+                <span>{emoji}</span>
+                <p>{text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <ul className="steps steps-vertical col-span-5 col-start-7 mt-8">
+          {steps[1].map(({ emoji, text }) => (
+            <li
+              data-content=""
+              className="step step-primary first:mb-5"
+              key={text}
+            >
+              <div className="card w-full bg-base-300 shadow-xl text-left p-6 flex flex-row items-center space-x-2">
+                <span>{emoji}</span>
+                <p>{text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </Section>
       <Section className="relative mt-24 pb-24">
         <Section className="col-span-full container">
@@ -48,7 +70,11 @@ const About: NextPage = () => {
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['common', 'main'])),
+      ...(await serverSideTranslations(locale as string, [
+        'common',
+        'main',
+        'about',
+      ])),
     },
   };
 };
