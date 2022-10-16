@@ -1,5 +1,3 @@
-import { link } from 'fs';
-
 import React, { useMemo } from 'react';
 
 import Accordion from '@streact/components-accordion';

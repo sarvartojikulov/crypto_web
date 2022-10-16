@@ -1,9 +1,9 @@
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 
 import { Disclosure, Transition } from '@headlessui/react';
 import { IconDropdown } from '@streact/core-assets';
 import cn from 'classnames';
-import parse from 'html-react-parser';
 
 type AccordionProps = {
   content: { header: string; body: string }[];
@@ -40,7 +40,7 @@ const Accordion: React.FC<AccordionProps> = ({ content }) => {
                   leaveTo="transform scale-95 opacity-0"
                 >
                   <Disclosure.Panel className="px-4 py-2 text-md text-base-content my-4 bg-base-100 rounded-lg prose prose-ul:list-disc max-w-none prose-p:leading-5 prose-p:my-0 prose-li:my-1 prose-ul:pl-4 leading-4">
-                    {parse(body)}
+                    {ReactHtmlParser(body)}
                   </Disclosure.Panel>
                 </Transition>
               </>

@@ -1,5 +1,8 @@
 {
   "name": "@streact/components-accordion",
   "version": "0.1.0",
-  "main": "./index.tsx"
+  "main": "./index.tsx",
+  "devDependencies": {
+    "@types/react-html-parser": "^2.0.2"
+  }
 }
