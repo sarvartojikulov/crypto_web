@@ -22,13 +22,13 @@ const About: NextPage = () => {
 
   return (
     <Layout title="About | Crypto Asset Exchanger" description="About us">
-      <Section className="container pt-10 md:pt-20">
+      <Section className="container pt-10 md:pt-20 auto-rows-auto">
         <h1 className="col-span-full text-center">{t('title')}</h1>
-        <div className="col-span-4 col-start-5 h-40">
+        <div className="col-span-full md:col-span-4 md:col-start-3 md:row-start-2 lg:col-start-5 h-40">
           <Logo className="h-full w-full" />
         </div>
         <h2 className="col-span-full text-4xl text-center">{t('subtitle')}</h2>
-        <ul className="steps steps-vertical col-span-5 col-start-2 mt-8">
+        <ul className="steps steps-vertical col-span-full md:col-span-4 lg:col-span-5 lg:col-start-2 mt-8">
           {steps[0].map(({ emoji, text }) => (
             <li
               data-content=""
@@ -42,7 +42,7 @@ const About: NextPage = () => {
             </li>
           ))}
         </ul>
-        <ul className="steps steps-vertical col-span-5 col-start-7 mt-8">
+        <ul className="steps steps-vertical col-span-full md:col-span-4 lg:md:col-span-5 lg:col-start-7 mt-8">
           {steps[1].map(({ emoji, text }) => (
             <li
               data-content=""
