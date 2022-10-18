@@ -42,7 +42,7 @@ const HowItWorks: NextPage = () => {
                 {body.map((text) => {
                   return (
                     <li className="step step-primary first:mb-5" key={text}>
-                      <div className="card w-full bg-base-300 shadow-2xl justify-center items-start text-left p-6">
+                      <div className="card w-full bg-base-300 shadow-md justify-center items-start text-left p-6">
                         <p>{text}</p>
                       </div>
                     </li>

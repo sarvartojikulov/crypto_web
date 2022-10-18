@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    font-family: 'Mukta', sans-serif;
+  }
   body {
     @apply min-h-screen;
   }
