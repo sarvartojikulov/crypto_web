@@ -27,7 +27,7 @@
     },
     {
       "header": "Sales Procedure",
-      "body": "<ul><li><p>You come to the selected office with BTC or other cryptocurrency.</p></li><li><p>After accepting the course and quantity of cryptocurrency sold, you send Mr Bitcoin or another cryptocurrency to the address provided by the employee.</p></li><li><p>In the case of BTC, we are waiting for 1 confirmation in the Blockchain network, in the case of another cryptocurrency we wait until the transaction is credited to our portfolio and then we spend cash</p></li></ul><p>If a cryptocurrency is sold to a representative, it must always be sent earlier. If you purchase cryptocurrency, we send it to the indicated portfolio when the representative confirms the transaction.</p>"
+      "body": "<ul><li><p>You come to the selected office with BTC or other cryptocurrency.</p></li><li><p>After accepting the course and quantity of cryptocurrency sold, you send Bitcoin or another cryptocurrency to the address provided by the employee.</p></li><li><p>In the case of BTC, we are waiting for 1 confirmation in the Blockchain network, in the case of another cryptocurrency we wait until the transaction is credited to our portfolio and then we send cash</p></li></ul><p>If a cryptocurrency is sold to a representative, it must always be sent earlier. If you purchase cryptocurrency, we send it to the indicated portfolio when the representative confirms the transaction.</p>"
     },
     {
       "header": "How much can I exchange Bitcoins or other cryptocurrencies for you?",
@@ -42,7 +42,7 @@
       "body": "<p>AML is an abbreviation of the Anti-Money Laundering phrase, which applies to all activities undertaken by organizations providing financial services ( mainly by banks ), aimed at eliminating the phenomenon of money laundering.</p>"
     },
     {
-      "header": "Can cryptocurrencies be replaced anonymously?",
+      "header": "Can cryptocurrencies be purchased anonymously?",
       "body": "<p>We carry out verification with an identity document if the amount exceeds EUR 1,000. An ID card is not necessary when exchanging up to EUR 1,000.</p>"
     },
     {
@@ -63,7 +63,7 @@
     },
     {
       "header": "When can I send you BTC / ETH / USDT?",
-      "body": "<p>You can send cryptocurrencies both before coming to the office and being in the office. However, we prefer email contact ( address sending and setting the ) course, which significantly speeds up the exchange of BTC or other cryptocurrency to fiat.</p>"
+      "body": "<p>You can send cryptocurrencies both before coming to the office and being in the office. However, we prefer email contact (address sending and setting the course), which significantly speeds up the exchange of BTC or other cryptocurrency to fiat.</p>"
     },
     {
       "header": "How do I get the BTC / ETH / USDT payment address?",

@@ -1,6 +1,6 @@
 {
   "landing": {
-    "title": "Giełda kryptowalut",
+    "title": "KANTOR KRYPTOWALUT",
     "description": "Wymień dowolną kryptowalutę natychmiast, w ciągu kilku minut, stacjonarnie.",
     "links": {
       "howItWorks": "jak to działa?",
@@ -12,7 +12,7 @@
   "calculator": {
     "tabs": {
       "buy": "Kup",
-      "sell": "Sprzedać"
+      "sell": "Sprzedaż"
     },
     "panels": {
       "youPay": "ty płacisz",
