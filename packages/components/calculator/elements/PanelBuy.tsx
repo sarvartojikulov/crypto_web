@@ -131,8 +131,6 @@ const PanelBuy: React.FC = () => {
   }, [buyWith, calculateInputPay]);
 
   function confirmForm() {
-    console.log(errors);
-
     return handleSubmit(({ inputGet, inputPay }) => {
       setData({
         action: 'buy',

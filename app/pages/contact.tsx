@@ -7,10 +7,8 @@ import Layout from '@streact/core-layout';
 import Section from '@streact/core-section';
 import { GetServerSideProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
 
 const Contact: NextPage = () => {
-  const { locale } = useRouter();
   return (
     <Layout title="Contact | Crypto Asset Exchanger" description="Contact us">
       <Section className="container mt-20 gap-y-10">

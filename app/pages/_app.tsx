@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Navbar />
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         <Component {...pageProps} />
       </AnimatePresence>
       <Footer />
