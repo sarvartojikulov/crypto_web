@@ -19,9 +19,8 @@
       "youGet": "вы получаете"
     },
     "fees": {
-      "fees": "сборы",
-      "serviceFees": "Плата за сервис",
-      "total": "суммарно"
+      "header": "все, что вам нужно заплатить, сборы включены",
+      "totals": "Cумма сборов"
     },
     "errors": {
       "input": "Please provide a valid order amount."

@@ -1,5 +1,11 @@
 /* eslint-disable no-console */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,12 +16,17 @@ import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 
 import { Totals, DataToSend } from '../types';
-import { validateInputs } from '../utils/validation';
+import { roundToDecimal } from '../utils/number';
+import { fiatMinimal, isPositiveNumber } from '../utils/validation';
 
 import CalculatorModal from './CalculatorModal';
+import TotalsBox from './TotalsBox';
+
+type InputKeys = 'inputGet' | 'inputPay';
+type FormInputs = Record<InputKeys, number>;
 
 const panelSchema = z.object({
-  inputPay: z.number().positive().min(1),
+  inputPay: z.number().positive().min(0),
   inputGet: z.number().positive().min(0),
 });
 
@@ -41,70 +52,114 @@ const PanelBuy: React.FC = () => {
     clearErrors,
     formState: { errors },
     handleSubmit,
-  } = useForm({
+  } = useForm<FormInputs>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
+    defaultValues: {
+      inputGet: 0,
+      inputPay: 0,
+    },
     resolver: zodResolver(panelSchema),
   });
-
-  const generateTotals = (num: number) => {
-    let fees: number;
-    if (!num) {
-      return { fees: 0, sum: 0 };
-    }
-    if (buyWith.toLowerCase() === 'usd') {
-      fees = num > 1000 ? num * admin.calculator.percent : 30;
-    } else {
-      const { rate } = fiatRates.find(({ pair }) =>
-        pair.toLowerCase().includes(buyWith.toLowerCase())
-      )!;
-
-      const inputInUsd = num / rate;
-      fees = inputInUsd > 1000 ? num * admin.calculator.percent : 30 * rate;
-    }
-    const sum = num + fees;
-    return { fees, sum };
-  };
 
   const setActiveInput = (input: 'pay' | 'get' | '') => {
     activeInput.current = input;
   };
 
-  const price = useCallback(() => {
+  const price = useMemo(() => {
     const coin = courses.find((item) => item.asset === getIn);
     const price = Number(coin?.prices[buyWith]);
     return price;
   }, [getIn, buyWith, courses]);
 
+  const actualRate = useMemo(() => {
+    const fiat = fiatRates.find(({ pair }) =>
+      pair.toLowerCase().includes(buyWith.toLowerCase())
+    )!;
+    return fiat.rate;
+  }, [buyWith, fiatRates]);
+
+  const getFees = useCallback(
+    (num: number) => {
+      if (num <= 0) {
+        return 0;
+      }
+      let fees;
+      if (buyWith.toLowerCase() === 'usd') {
+        fees = num > 1000 ? num * admin.calculator.percent : 30;
+      } else {
+        const inputInUsd = num / actualRate;
+        fees =
+          inputInUsd > 1000 ? num * admin.calculator.percent : 30 * actualRate;
+      }
+      return fees;
+    },
+    [actualRate, admin.calculator.percent, buyWith]
+  );
+
   const calculateInputGet = useCallback(() => {
     const { inputPay } = getValues();
-    const converted = inputPay / price();
-    setValue('inputGet', converted ? converted.toFixed(6) : 0);
-    const totals = generateTotals(inputPay);
-    setTotals(totals);
-  }, [price, getValues, setValue, admin.calculator.percent]);
+    const fees = getFees(inputPay);
+    const converted = (inputPay - fees) / price;
+    setValue('inputGet', converted ? roundToDecimal(converted, 6) : 0);
+    setTotals({ fees, sum: inputPay });
+  }, [price, getValues, setValue, getFees]);
 
   const calculateInputPay = useCallback(() => {
     const { inputGet } = getValues();
-    const converted = inputGet * price();
-    setValue('inputPay', converted ? converted.toFixed(2) : 0);
-    const totals = generateTotals(converted);
-    setTotals(totals);
-  }, [price, getValues, setValue, admin.calculator.percent]);
+    const converted = inputGet * price;
+    const fees = getFees(converted);
+    const sum = converted + fees;
+    setValue('inputPay', converted ? roundToDecimal(sum, 2) : 0);
+    setTotals({ fees, sum });
+  }, [price, getValues, setValue, getFees]);
 
+  const validation = useCallback(
+    (input: number, inputKey: 'inputGet' | 'inputPay') => {
+      if (!isPositiveNumber(input)) {
+        setError(inputKey, { message: 'main:calculator.errors.input' });
+        return false;
+      }
+      if (inputKey === 'inputGet' && !fiatMinimal(input * price)) {
+        setError(inputKey, { message: 'main:calculator.errors.minValue' });
+        return false;
+      }
+      if (
+        buyWith.toLowerCase() === 'usd' &&
+        inputKey === 'inputPay' &&
+        !fiatMinimal(input)
+      ) {
+        setError(inputKey, { message: 'main:calculator.errors.minValue' });
+        return false;
+      }
+      if (buyWith.toLowerCase() !== 'usd' && inputKey === 'inputPay') {
+        const inputInUsd = input / actualRate;
+        if (!fiatMinimal(inputInUsd)) {
+          setError(inputKey, { message: 'main:calculator.errors.minValue' });
+          return false;
+        }
+      }
+      return true;
+    },
+    [actualRate, buyWith, price, setError]
+  );
   useEffect(() => {
-    const subscription = watch((value, { name }) => {
+    const subscription = watch((values, { name }) => {
       if (name === 'inputPay' && activeInput.current === 'pay') {
-        const inValid = validateInputs(value.inputPay);
-        if (inValid) return setError(name, { message: 'invalid' });
+        const isValid = validation(values[name]!, name);
+        if (!isValid) {
+          return;
+        }
         if (errors.inputPay) {
           clearErrors(name);
         }
         calculateInputGet();
       }
       if (name === 'inputGet' && activeInput.current === 'get') {
-        const inValid = validateInputs(value.inputGet);
-        if (inValid) return setError(name, { message: 'invalid' });
+        const isValid = validation(values[name]!, name);
+        if (!isValid) {
+          return;
+        }
         if (errors.inputGet) {
           clearErrors(name);
         }
@@ -119,16 +174,17 @@ const PanelBuy: React.FC = () => {
     price,
     errors,
     clearErrors,
+    validation,
     setError,
   ]);
 
   useEffect(() => {
-    calculateInputGet();
-  }, [getIn, calculateInputGet]);
+    calculateInputPay();
+  }, [getIn, calculateInputPay]);
 
   useEffect(() => {
-    calculateInputPay();
-  }, [buyWith, calculateInputPay]);
+    calculateInputGet();
+  }, [buyWith, calculateInputGet]);
 
   function confirmForm() {
     return handleSubmit(({ inputGet, inputPay }) => {
@@ -173,7 +229,7 @@ const PanelBuy: React.FC = () => {
             {errors.inputPay?.message && (
               <label className="label text-center col-span-full md:max-w-[200px]">
                 <span className="label-text-alt text-red-400 mx-auto">
-                  {t('main:calculator.errors.input')}
+                  {t(errors.inputPay.message as string)}
                 </span>
               </label>
             )}
@@ -201,37 +257,23 @@ const PanelBuy: React.FC = () => {
             {errors.inputGet?.message && (
               <label className="label text-center col-span-full md:max-w-[200px]">
                 <span className="label-text-alt text-red-400 mx-auto">
-                  {t('main:calculator.errors.input')}
+                  {t(errors.inputGet.message)}
                 </span>
               </label>
             )}
           </div>
         </div>
-
-        <div className="col-span-full mx-5 md:mx-0 md:col-span-4 md:col-start-3 bg-base-200 text-sm shadow-lg rounded-xl py-2 px-4 flex flex-col">
-          <span className="capitalize">{t('main:calculator.fees.fees')}</span>
-          <div className="divider divider-vertical my-0"></div>
-          <div className="flex justify-between">
-            <span>{t('main:calculator.fees.serviceFees')}</span>
-            <span>
-              {totals ? totals.fees.toFixed(2) : 0} {buyWith}
-            </span>
-          </div>
-          <div className="divider divider-vertical my-0"></div>
-          <div className="flex justify-between">
-            <span className="font-bold capitalize">
-              {t('main:calculator.fees.total')}
-            </span>
-            <span className="text-accent font-bold">
-              {totals ? totals.sum.toFixed(2) : 0} {buyWith}
-            </span>
-          </div>
-        </div>
+        <p className="col-span-2 col-start-4 text-center">
+          {`1 ${getIn} = ${price.toFixed(4)} ${buyWith}`}
+        </p>
+        <TotalsBox totals={totals} currency={buyWith} />
         <button
           className="btn btn-primary col-span-full mx-5 md:mx-0 md:col-span-4 md:col-start-3"
           onClick={confirmForm()}
         >
-          {t('common:button.confirm')}
+          {`${t('common:button.confirm')} - ${
+            totals?.sum ? totals.sum.toFixed(2) : 0
+          }`}
         </button>
       </div>
     </>

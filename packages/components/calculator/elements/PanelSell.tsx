@@ -1,5 +1,11 @@
 /* eslint-disable no-console */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,12 +16,14 @@ import { useTranslation } from 'next-i18next';
 import { z } from 'zod';
 
 import { DataToSend, Totals } from '../types';
-import { validateInputs } from '../utils/validation';
+import { roundToDecimal } from '../utils/number';
+import { isPositiveNumber, fiatMinimal } from '../utils/validation';
 
 import CalculatorModal from './CalculatorModal';
+import TotalsBox from './TotalsBox';
 
 const panelSchema = z.object({
-  inputPay: z.number().positive().min(1),
+  inputPay: z.number().positive().min(0),
   inputGet: z.number().positive().min(0),
 });
 
@@ -44,70 +52,116 @@ const PanelSell: React.FC = () => {
   } = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
+    defaultValues: {
+      inputGet: 0,
+      inputPay: 0,
+    },
     resolver: zodResolver(panelSchema),
   });
-
-  const generateTotals = () => {
-    const { inputGet } = getValues();
-    if (!inputGet) {
-      return { fees: 0, sum: 0 };
-    }
-    const num = Number(inputGet);
-    let fees: number;
-    if (getIn.toLowerCase() === 'usd') {
-      fees = num > 1000 ? num * admin.calculator.percent : 30;
-    } else {
-      const { rate } = fiatRates.find(({ pair }) =>
-        pair.toLowerCase().includes(getIn.toLowerCase())
-      )!;
-
-      const inputInUsd = num / rate;
-      fees = inputInUsd > 1000 ? num * admin.calculator.percent : 30 * rate;
-    }
-    const sum = num + fees;
-    return { fees, sum };
-  };
 
   const setActiveInput = (input: 'pay' | 'get' | '') => {
     activeInput.current = input;
   };
+  console.log(courses);
+  console.log(buyWith, getIn);
 
-  const price = useCallback(() => {
+  const price = useMemo(() => {
     const coin = courses.find((item) => item.asset === buyWith);
     const price = Number(coin?.prices[getIn]);
     return price;
   }, [getIn, buyWith, courses]);
 
+  const actualRate = useMemo(() => {
+    const fiat = fiatRates.find(({ pair }) =>
+      pair.toLowerCase().includes(getIn.toLowerCase())
+    )!;
+    return fiat.rate;
+  }, [buyWith, fiatRates]);
+
+  const getFees = useCallback(
+    (num: number) => {
+      if (num <= 0) {
+        return 0;
+      }
+      let fees;
+      if (getIn.toLowerCase() === 'usd') {
+        fees = num > 1000 ? num * admin.calculator.percent : 30;
+      } else {
+        const inputInUsd = num / actualRate;
+        fees =
+          inputInUsd > 1000 ? num * admin.calculator.percent : 30 * actualRate;
+      }
+      return fees;
+    },
+    [actualRate, admin.calculator.percent, buyWith]
+  );
+
   const calculateInputGet = useCallback(() => {
     const { inputPay } = getValues();
-    const converted = inputPay * price();
-    setValue('inputGet', converted ? converted.toFixed(2) : 0);
-    const totals = generateTotals();
-    setTotals(totals);
+    const converted = inputPay * price;
+    const fees = getFees(converted);
+    const sum = converted - fees;
+    console.log(converted);
+    setValue('inputGet', converted ? roundToDecimal(sum, 6) : 0);
+    setTotals({ fees, sum: converted });
   }, [price, getValues, setValue, admin.calculator.percent]);
 
   const calculateInputPay = useCallback(() => {
     const { inputGet } = getValues();
-    const converted = inputGet / price();
-    setValue('inputPay', converted ? converted.toFixed(6) : 0);
-    const totals = generateTotals();
-    setTotals(totals);
+    const fees = getFees(inputGet);
+    const converted = (inputGet - fees) / price;
+    setValue('inputPay', converted ? roundToDecimal(converted, 6) : 0);
+    setTotals({ fees, sum: inputGet });
   }, [price, getValues, setValue, admin.calculator.percent]);
 
+  const validation = useCallback(
+    (input: number, inputKey: 'inputGet' | 'inputPay') => {
+      if (!isPositiveNumber(input)) {
+        setError(inputKey, { message: 'main:calculator.errors.input' });
+        return false;
+      }
+      if (inputKey === 'inputPay' && !fiatMinimal(input * price)) {
+        setError(inputKey, { message: 'main:calculator.errors.minValue' });
+        return false;
+      }
+      if (
+        getIn.toLowerCase() === 'usd' &&
+        inputKey === 'inputGet' &&
+        !fiatMinimal(input)
+      ) {
+        setError(inputKey, { message: 'main:calculator.errors.minValue' });
+        return false;
+      }
+      if (getIn.toLowerCase() !== 'usd' && inputKey === 'inputGet') {
+        const inputInUsd = input / actualRate;
+        if (!fiatMinimal(inputInUsd)) {
+          setError(inputKey, { message: 'main:calculator.errors.minValue' });
+          return false;
+        }
+      }
+      return true;
+    },
+    [actualRate, buyWith, price, setError]
+  );
+
   useEffect(() => {
-    const subscription = watch((value, { name }) => {
+    const subscription = watch((values, { name }) => {
       if (name === 'inputPay' && activeInput.current === 'pay') {
-        const inValid = validateInputs(value.inputPay);
-        if (inValid) return setError(name, { message: 'invalid' });
-        if (errors.inputPay?.message) {
+        const isValid = validation(values[name]!, name);
+        if (!isValid) {
+          return;
+        }
+        if (errors.inputPay) {
           clearErrors(name);
         }
         calculateInputGet();
       }
       if (name === 'inputGet' && activeInput.current === 'get') {
-        const inValid = validateInputs(value.inputGet);
-        if (inValid) return setError(name, { message: 'invalid' });
-        if (errors.inputGet?.message) {
+        const isValid = validation(values[name]!, name);
+        if (!isValid) {
+          return;
+        }
+        if (errors.inputGet) {
           clearErrors(name);
         }
         calculateInputPay();
@@ -175,7 +229,7 @@ const PanelSell: React.FC = () => {
             {errors.inputPay?.message && (
               <label className="label text-center col-span-full md:max-w-[200px]">
                 <span className="label-text-alt text-red-400 mx-auto">
-                  {t('main:calculator.errors.input')}
+                  {t(errors.inputPay.message as string)}
                 </span>
               </label>
             )}
@@ -203,37 +257,23 @@ const PanelSell: React.FC = () => {
             {errors.inputGet?.message && (
               <label className="label text-center col-span-full md:max-w-[200px]">
                 <span className="label-text-alt text-red-400 mx-auto">
-                  {t('main:calculator.errors.input')}
+                  {t(errors.inputGet.message as string)}
                 </span>
               </label>
             )}
           </div>
         </div>
-
-        <div className="col-span-full mx-5 md:mx-0 md:col-span-4 md:col-start-3 bg-base-200 text-sm shadow-lg rounded-xl py-2 px-4 flex flex-col">
-          <span className="capitalize">{t('main:calculator.fees.fees')}</span>
-          <div className="divider divider-vertical my-0"></div>
-          <div className="flex justify-between">
-            <span>{t('main:calculator.fees.serviceFees')}</span>
-            <span>
-              {totals ? totals.fees.toFixed(2) : 0} {getIn}
-            </span>
-          </div>
-          <div className="divider divider-vertical my-0"></div>
-          <div className="flex justify-between">
-            <span className="font-bold capitalize">
-              {t('main:calculator.fees.total')}
-            </span>
-            <span className="text-accent font-bold">
-              {totals ? totals.sum.toFixed(2) : 0} {getIn}
-            </span>
-          </div>
-        </div>
+        <p className="col-span-2 col-start-4 text-center">
+          {`1 ${buyWith} = ${price.toFixed(4)} ${getIn}`}
+        </p>
+        <TotalsBox totals={totals} currency={getIn} />
         <button
           className="btn btn-primary col-span-full mx-5 md:mx-0 md:col-span-4 md:col-start-3"
           onClick={confirmForm()}
         >
-          {t('common:button.confirm')}
+          {`${t('common:button.confirm')} - ${
+            totals?.sum ? totals.sum.toFixed(2) : 0
+          }`}
         </button>
       </div>
     </>

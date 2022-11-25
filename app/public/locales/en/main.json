@@ -19,9 +19,8 @@
       "youGet": "you get"
     },
     "fees": {
-      "fees": "Fees",
-      "serviceFees": "Service fees",
-      "total": "total"
+      "header": "all you have to pay, fees included.",
+      "totals": "Total fees"
     },
     "errors": {
       "input": "Please provide a valid order amount."

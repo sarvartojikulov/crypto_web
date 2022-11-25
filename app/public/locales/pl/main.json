@@ -19,9 +19,8 @@
       "youGet": "dostajesz"
     },
     "fees": {
-      "fees": "opłaty",
-      "serviceFees": "Opłaty za usługi",
-      "total": "całkowity"
+      "header": "to wszystko, co musisz zapłacić",
+      "totals": "Wszystkie koszty"
     },
     "errors": {
       "input": "Podaj prawidłową kwotę zamówienia."
