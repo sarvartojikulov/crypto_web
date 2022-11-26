@@ -23,7 +23,8 @@
       "totals": "Wszystkie koszty"
     },
     "errors": {
-      "input": "Podaj prawidłową kwotę zamówienia."
+      "input": "Podaj prawidłową kwotę zamówienia.",
+      "minValue": "Wartość zamówienia nie może być niższa niż {{amount}}"
     }
   },
   "about": {

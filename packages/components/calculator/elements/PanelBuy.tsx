@@ -179,12 +179,10 @@ const PanelBuy: React.FC = () => {
   ]);
 
   useEffect(() => {
-    calculateInputPay();
-  }, [getIn, calculateInputPay]);
-
-  useEffect(() => {
-    calculateInputGet();
-  }, [buyWith, calculateInputGet]);
+    setValue('inputGet', 0);
+    setValue('inputPay', 0);
+    clearErrors(['inputGet', 'inputPay']);
+  }, [getIn, buyWith]);
 
   function confirmForm() {
     return handleSubmit(({ inputGet, inputPay }) => {
@@ -229,7 +227,12 @@ const PanelBuy: React.FC = () => {
             {errors.inputPay?.message && (
               <label className="label text-center col-span-full md:max-w-[200px]">
                 <span className="label-text-alt text-red-400 mx-auto">
-                  {t(errors.inputPay.message as string)}
+                  {t(errors.inputPay.message, {
+                    amount:
+                      buyWith.toLowerCase() === 'usd'
+                        ? `30 USD`
+                        : `${(actualRate * 30).toFixed(2)} ${buyWith}`,
+                  })}
                 </span>
               </label>
             )}
@@ -257,7 +260,12 @@ const PanelBuy: React.FC = () => {
             {errors.inputGet?.message && (
               <label className="label text-center col-span-full md:max-w-[200px]">
                 <span className="label-text-alt text-red-400 mx-auto">
-                  {t(errors.inputGet.message)}
+                  {t(errors.inputGet.message, {
+                    amount:
+                      buyWith.toLowerCase() === 'usd'
+                        ? `30 USD`
+                        : `${(actualRate * 30).toFixed(2)} ${buyWith}`,
+                  })}
                 </span>
               </label>
             )}

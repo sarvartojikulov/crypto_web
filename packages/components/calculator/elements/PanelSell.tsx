@@ -84,6 +84,7 @@ const PanelSell: React.FC = () => {
         return 0;
       }
       let fees;
+      console.log('get in in getfess callback', getIn);
       if (getIn.toLowerCase() === 'usd') {
         fees = num > 1000 ? num * admin.calculator.percent : 30;
       } else {
@@ -93,7 +94,7 @@ const PanelSell: React.FC = () => {
       }
       return fees;
     },
-    [actualRate, admin.calculator.percent, buyWith]
+    [actualRate, admin.calculator.percent, buyWith, getIn]
   );
 
   const calculateInputGet = useCallback(() => {
@@ -109,6 +110,8 @@ const PanelSell: React.FC = () => {
   const calculateInputPay = useCallback(() => {
     const { inputGet } = getValues();
     const fees = getFees(inputGet);
+    console.log(fees);
+
     const converted = (inputGet - fees) / price;
     setValue('inputPay', converted ? roundToDecimal(converted, 6) : 0);
     setTotals({ fees, sum: inputGet });
@@ -179,12 +182,10 @@ const PanelSell: React.FC = () => {
   ]);
 
   useEffect(() => {
-    calculateInputGet();
-  }, [getIn, calculateInputGet]);
-
-  useEffect(() => {
-    calculateInputPay();
-  }, [buyWith, calculateInputPay]);
+    setValue('inputGet', 0);
+    setValue('inputPay', 0);
+    clearErrors(['inputGet', 'inputPay']);
+  }, [getIn, buyWith]);
 
   function confirmForm() {
     return handleSubmit(({ inputGet, inputPay }) => {
@@ -229,7 +230,12 @@ const PanelSell: React.FC = () => {
             {errors.inputPay?.message && (
               <label className="label text-center col-span-full md:max-w-[200px]">
                 <span className="label-text-alt text-red-400 mx-auto">
-                  {t(errors.inputPay.message as string)}
+                  {t(errors.inputPay.message, {
+                    amount:
+                      getIn.toLowerCase() === 'usd'
+                        ? `30 USD`
+                        : `${(actualRate * 30).toFixed(2)} ${getIn}`,
+                  })}
                 </span>
               </label>
             )}
@@ -257,7 +263,12 @@ const PanelSell: React.FC = () => {
             {errors.inputGet?.message && (
               <label className="label text-center col-span-full md:max-w-[200px]">
                 <span className="label-text-alt text-red-400 mx-auto">
-                  {t(errors.inputGet.message as string)}
+                  {t(errors.inputGet.message, {
+                    amount:
+                      getIn.toLowerCase() === 'usd'
+                        ? `30 USD`
+                        : `${(actualRate * 30).toFixed(2)} ${getIn}`,
+                  })}
                 </span>
               </label>
             )}

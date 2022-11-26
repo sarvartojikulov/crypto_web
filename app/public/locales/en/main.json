@@ -23,7 +23,8 @@
       "totals": "Total fees"
     },
     "errors": {
-      "input": "Please provide a valid order amount."
+      "input": "Please provide a valid order amount.",
+      "minValue": "Order value can't be lower than {{amount}}"
     }
   },
   "about": {

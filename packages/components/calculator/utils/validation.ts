@@ -1,7 +1,7 @@
 export const isPositiveNumber = (input: number): boolean => {
   const isNumber = !Number.isNaN(input);
-  const isNegative = input < 0;
-  return isNumber || !isNegative;
+  const isPositive = input > 0;
+  return isNumber && isPositive;
 };
 
 export const fiatMinimal = (input: number): boolean => {

@@ -23,7 +23,8 @@
       "totals": "Cумма сборов"
     },
     "errors": {
-      "input": "Please provide a valid order amount."
+      "input": "Пожалуйста, укажите правильную сумму заказа.",
+      "minValue": "Стоимость заказа не может быть меньше {{amount}}"
     }
   },
   "about": {
