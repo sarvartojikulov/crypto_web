@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, {
   useCallback,
   useEffect,
@@ -9,32 +8,53 @@ import React, {
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Select } from '@streact/core-form';
-import { useAppData } from '@streact/services-context';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import { Select } from 'packages/core/form';
+import { Currency } from 'packages/lib/binance/types';
+import { useAppData } from 'packages/services/context';
 import { z } from 'zod';
 
-import { DataToSend, Totals } from '../types';
-import { roundToDecimal } from '../utils/number';
+import { Totals, DataToSend } from '../types';
 import { isPositiveNumber, fiatMinimal } from '../utils/validation';
 
 import CalculatorModal from './CalculatorModal';
 import TotalsBox from './TotalsBox';
+
+const getCoinPrice = (courses: Currency[], fiat: string, crypto: string) => {
+  const coin = courses.find((item) => item.asset === fiat);
+  const price = Number(coin?.prices[crypto]);
+  return price;
+};
 
 const panelSchema = z.object({
   inputPay: z.number().positive().min(0),
   inputGet: z.number().positive().min(0),
 });
 
-const PanelSell: React.FC = () => {
+type InputKeys = 'inputGet' | 'inputPay';
+type FormInputs = Record<InputKeys, number>;
+
+type Props = {
+  buyWithAssets: string[];
+  getInAssets: string[];
+  calculateInputGet: () => void;
+  calculateInputPay: () => void;
+};
+
+const CalculatorPanel: React.FC<Props> = ({
+  buyWithAssets,
+  getInAssets,
+  calculateInputGet,
+  calculateInputPay,
+}) => {
   const { t } = useTranslation(['main', 'common']);
   const {
     currencies: { available, courses, fiatRates },
     admin,
   } = useAppData();
-  const [buyWith, setBuyWith] = useState<string>(available.crypto[0]);
-  const [getIn, setGetIn] = useState<string>(available.fiat[0]);
+  const [buyWith, setBuyWith] = useState<string>(available.fiat[0]);
+  const [getIn, setGetIn] = useState<string>(available.crypto[0]);
   const [totals, setTotals] = useState<Totals>();
   const activeInput = useRef('');
   const [data, setData] = useState<DataToSend>();
@@ -49,7 +69,7 @@ const PanelSell: React.FC = () => {
     clearErrors,
     formState: { errors },
     handleSubmit,
-  } = useForm({
+  } = useForm<FormInputs>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: {
@@ -63,57 +83,27 @@ const PanelSell: React.FC = () => {
     activeInput.current = input;
   };
 
-  const price = useMemo(() => {
-    const coin = courses.find((item) => item.asset === buyWith);
-    const price = Number(coin?.prices[getIn]);
-    return price;
-  }, [getIn, buyWith, courses]);
-
   const actualRate = useMemo(() => {
     const fiat = fiatRates.find(({ pair }) =>
-      pair.toLowerCase().includes(getIn.toLowerCase())
+      pair.toLowerCase().includes(buyWith.toLowerCase())
     )!;
     return fiat.rate;
   }, [buyWith, fiatRates]);
 
-  const getFees = useCallback(
-    (num: number) => {
-      if (num <= 0) {
-        return 0;
-      }
-      let fees;
-      console.log('get in in getfess callback', getIn);
-      if (getIn.toLowerCase() === 'usd') {
-        fees = num > 1000 ? num * admin.calculator.percent : 30;
-      } else {
-        const inputInUsd = num / actualRate;
-        fees =
-          inputInUsd > 1000 ? num * admin.calculator.percent : 30 * actualRate;
-      }
-      return fees;
-    },
-    [actualRate, admin.calculator.percent, buyWith, getIn]
-  );
-
-  const calculateInputGet = useCallback(() => {
-    const { inputPay } = getValues();
-    const converted = inputPay * price;
-    const fees = getFees(converted);
-    const sum = converted - fees;
-    console.log(converted);
-    setValue('inputGet', converted ? roundToDecimal(sum, 6) : 0);
-    setTotals({ fees, sum: converted });
-  }, [price, getValues, setValue, admin.calculator.percent]);
-
-  const calculateInputPay = useCallback(() => {
-    const { inputGet } = getValues();
-    const fees = getFees(inputGet);
-    console.log(fees);
-
-    const converted = (inputGet - fees) / price;
-    setValue('inputPay', converted ? roundToDecimal(converted, 6) : 0);
-    setTotals({ fees, sum: inputGet });
-  }, [price, getValues, setValue, admin.calculator.percent]);
+  const getFees = (num: number) => {
+    if (num <= 0) {
+      return 0;
+    }
+    let fees;
+    if (buyWith.toLowerCase() === 'usd') {
+      fees = num > 1000 ? num * admin.calculator.percent : 30;
+    } else {
+      const inputInUsd = num / actualRate;
+      fees =
+        inputInUsd > 1000 ? num * admin.calculator.percent : 30 * actualRate;
+    }
+    return fees;
+  };
 
   const validation = useCallback(
     (input: number, inputKey: 'inputGet' | 'inputPay') => {
@@ -121,19 +111,22 @@ const PanelSell: React.FC = () => {
         setError(inputKey, { message: 'main:calculator.errors.input' });
         return false;
       }
-      if (inputKey === 'inputPay' && !fiatMinimal(input * price)) {
+      if (
+        inputKey === 'inputGet' &&
+        !fiatMinimal(input * getCoinPrice(courses, buyWith, getIn))
+      ) {
         setError(inputKey, { message: 'main:calculator.errors.minValue' });
         return false;
       }
       if (
-        getIn.toLowerCase() === 'usd' &&
-        inputKey === 'inputGet' &&
+        buyWith.toLowerCase() === 'usd' &&
+        inputKey === 'inputPay' &&
         !fiatMinimal(input)
       ) {
         setError(inputKey, { message: 'main:calculator.errors.minValue' });
         return false;
       }
-      if (getIn.toLowerCase() !== 'usd' && inputKey === 'inputGet') {
+      if (buyWith.toLowerCase() !== 'usd' && inputKey === 'inputPay') {
         const inputInUsd = input / actualRate;
         if (!fiatMinimal(inputInUsd)) {
           setError(inputKey, { message: 'main:calculator.errors.minValue' });
@@ -142,7 +135,7 @@ const PanelSell: React.FC = () => {
       }
       return true;
     },
-    [actualRate, buyWith, price, setError]
+    [actualRate, buyWith, setError]
   );
 
   useEffect(() => {
@@ -173,10 +166,11 @@ const PanelSell: React.FC = () => {
     watch,
     calculateInputGet,
     calculateInputPay,
-    price,
+
     errors,
-    setError,
     clearErrors,
+    validation,
+    setError,
   ]);
 
   useEffect(() => {
@@ -188,7 +182,7 @@ const PanelSell: React.FC = () => {
   function confirmForm() {
     return handleSubmit(({ inputGet, inputPay }) => {
       setData({
-        action: 'sell',
+        action: 'buy',
         buyWith,
         getIn,
         pay: inputPay,
@@ -211,7 +205,7 @@ const PanelSell: React.FC = () => {
             <Select
               style="accent"
               value={buyWith}
-              currencies={available.crypto}
+              currencies={buyWithAssets}
               onChange={setBuyWith}
             />
             <input
@@ -230,9 +224,9 @@ const PanelSell: React.FC = () => {
                 <span className="label-text-alt text-red-400 mx-auto">
                   {t(errors.inputPay.message, {
                     amount:
-                      getIn.toLowerCase() === 'usd'
+                      buyWith.toLowerCase() === 'usd'
                         ? `30 USD`
-                        : `${(actualRate * 30).toFixed(2)} ${getIn}`,
+                        : `${(actualRate * 30).toFixed(2)} ${buyWith}`,
                   })}
                 </span>
               </label>
@@ -246,7 +240,7 @@ const PanelSell: React.FC = () => {
             <Select
               style="primary"
               value={getIn}
-              currencies={available.fiat}
+              currencies={getInAssets}
               onChange={setGetIn}
             />
             <input
@@ -263,9 +257,9 @@ const PanelSell: React.FC = () => {
                 <span className="label-text-alt text-red-400 mx-auto">
                   {t(errors.inputGet.message, {
                     amount:
-                      getIn.toLowerCase() === 'usd'
+                      buyWith.toLowerCase() === 'usd'
                         ? `30 USD`
-                        : `${(actualRate * 30).toFixed(2)} ${getIn}`,
+                        : `${(actualRate * 30).toFixed(2)} ${buyWith}`,
                   })}
                 </span>
               </label>
@@ -273,9 +267,11 @@ const PanelSell: React.FC = () => {
           </div>
         </div>
         <p className="col-span-2 col-start-4 text-center">
-          {`1 ${buyWith} = ${price.toFixed(4)} ${getIn}`}
+          {`1 ${getIn} = ${getCoinPrice(courses, buyWith, getIn).toFixed(
+            4
+          )} ${buyWith}`}
         </p>
-        <TotalsBox totals={totals} currency={getIn} />
+        <TotalsBox totals={totals} currency={buyWith} />
         <button
           className="btn btn-primary col-span-full mx-5 md:mx-0 md:col-span-4 md:col-start-3"
           onClick={confirmForm()}
@@ -289,4 +285,4 @@ const PanelSell: React.FC = () => {
   );
 };
 
-export default PanelSell;
+export default CalculatorPanel;

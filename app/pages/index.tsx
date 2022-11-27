@@ -34,8 +34,8 @@ const LandingSection: React.FC = () => {
         </button>
       </a>
       <a className="col-span-2 row-start-3 " href="tel:+48 574 483 909">
-        <button className="group btn btn-primary btn-outline space-x-3 md:space-x-2 w-full justify-center items-center md:justify-start md:w-auto ">
-          <IconRingPhone className="fill-primary group-hover:fill-base-300 h-full w-auto py-3 md:py-3.5" />
+        <button className="group btn btn-primary btn-outline space-x-3 md:space-x-2 w-full justify-center items-center md:justify-start md:w-auto">
+          <IconRingPhone className="w-3 fill-primary group-hover:fill-base-300 h-auto sm:py-3 md:py-3.5" />
           <span>{t('landing.links.call')}</span>
         </button>
       </a>

@@ -214,7 +214,7 @@ const PanelBuy: React.FC = () => {
               onChange={setBuyWith}
             />
             <input
-              type="text"
+              type="number"
               placeholder="0.000"
               {...register('inputPay', {
                 valueAsNumber: true,
@@ -249,7 +249,7 @@ const PanelBuy: React.FC = () => {
               onChange={setGetIn}
             />
             <input
-              type="text"
+              type="number"
               className="input input-primary h-[42px] mt-1 w-full md:max-w-[200px] col-span-3"
               placeholder="0.000"
               {...register('inputGet', {

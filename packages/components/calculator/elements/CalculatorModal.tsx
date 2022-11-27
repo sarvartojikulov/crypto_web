@@ -14,7 +14,10 @@ import { DataToSend } from '../types';
 
 const modalSchema = z.object({
   name: z.string().min(1, 'errors.required'),
-  phone: z.number().min(1, 'errors.required'),
+  phone: z.number({
+    required_error: 'errors.required',
+    invalid_type_error: 'errors.number',
+  }),
   email: z.string().email('errors.email').min(1, 'errors.required'),
 });
 
@@ -91,7 +94,7 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
                   <span className="label-text">{t('labels.phone')}</span>
                 </label>
                 <input
-                  type="text"
+                  type="tel"
                   className="input input-accent h-12 w-full"
                   {...register('phone', { valueAsNumber: true })}
                 />
